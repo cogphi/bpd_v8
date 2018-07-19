@@ -18,9 +18,9 @@
   <script src="jspsych-6.0.4/plugins/jspsych-fullscreen.js"></script>
 
   <script src="jquery-3.3.1.min.js"></script>
+  <script src="vendor/lodash-4.17.10.min.js"></script>
 
   <script src="jspsych-6.0.4/js.cookie.js"></script>
-  <script src="functions.js"></script>
 
   <link href="jspsych-6.0.4/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 
@@ -248,20 +248,51 @@
   ];
   // ===============================================================================
   // Set up mousetracking variables
-  var xpos;
-  var ypos;
   var timefinal;
-  var xposstore = [];
-  var yposstore = [];
-  var timestamp = [];
-
-// store mouse coordinates (just one event handler, always running)
-$(document).ready(function(){
-  $(document).on('mousemove', function (e) {
-    xpos = e.pageX;
-    ypos = e.pageY;
-  })
-})
+  
+  // create a mouse tracker that will handle all recordings for us.
+  // you probably only need one of these.
+  // 
+  var makeMouseTracker = function(minTimeBetweenRecordingsInMS) {
+    var startTime = 0;
+    var xposstore = [];
+    var yposstore = [];
+    var timestamps = [];
+    var onMouseMove = function(){};
+    var recordMouseMovements = function(e) {
+      timestamps.push( (new Date()).getTime() - startTime );
+      xposstore.push( e.pageX );
+      yposstore.push( e.pageY );
+    }
+    if( minTimeBetweenRecordingsInMS > 0 ) {
+      recordMouseMovements = _.throttle(recordMouseMovements, minTimeBetweenRecordingsInMS, {leading:true})
+    }
+    $(document).ready(function(){
+      $(document).on('mousemove', function (e) {
+        onMouseMove(e);
+      })
+    })
+    return {
+      startRecording : function(){
+        startTime = (new Date()).getTime();
+        xposstore = [];
+        yposstore = [];
+        timestamps = [];
+        onMouseMove = recordMouseMovements;
+      },
+      stopRecording : function(){
+        onMouseMove = function(){};
+      },
+      getData : function() {
+        return {
+          xposstore : xposstore,
+          yposstore : yposstore,
+          timestamps : timestamps
+        }
+      }
+    }
+  }
+  var mouseTracker = makeMouseTracker(10);  // 10, i.e. readings no more often than 1 every 10ms
 
   // Set up misc variables
   var lasttrialdata;
@@ -756,19 +787,7 @@ $(document).ready(function(){
     response_ends_trial: true,
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     post_trial_gap: 500,
-    on_load: function myMouseTracker() {
-      timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
-      var start_time = (new Date()).getTime();
-      console.log({xpos:xpos, ypos:ypos});
-      myRecord = setInterval(getMousePosition, 10);
-      function getMousePosition() {
-        var cur_time = (new Date()).getTime();
-        var time = cur_time - start_time;
-        xposstore.push(xpos);
-        yposstore.push(ypos);
-        timestamp.push(time);
-      }
-    },
+    on_load: mouseTracker.startRecording,
     choices: [
       jsPsych.timelineVariable('amounta'), 
       "Start", 
@@ -798,7 +817,8 @@ $(document).ready(function(){
       computeramount: jsPsych.timelineVariable('computeramount')
     },
     on_finish: function (data) {
-      clearInterval(myRecord); // Stop mouse tracking
+      mouseTracker.stopRecording(); 
+      var mouseData = mouseTracker.getData();
       // Calculate payout and colour of participant choice
       var yourpayout = 0;
       var yourcolor = "";
@@ -832,11 +852,11 @@ $(document).ready(function(){
         yourcolor: yourcolor,
         computerpayout: computerpayout,
         computercolor: computercolor,
-        xposfinal: xpos,
-        yposfinal: ypos,
-        xposstore: xposstore,
-        yposstore: yposstore,
-        timestamp: timestamp,
+        xposfinal: mouseData.xposstore[mouseData.xposstore.length-1],
+        yposfinal: mouseData.yposstore[mouseData.yposstore.length-1],
+        xposstore: mouseData.xposstore,
+        yposstore: mouseData.yposstore,
+        timestamp: mouseData.timestamps,
       });
     },
   }
@@ -1480,18 +1500,7 @@ $(document).ready(function(){
     trial_duration: 3000,
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     post_trial_gap: _debug ? 100 : 500,
-    on_load: function myMouseTracker() {
-      timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
-      var start_time = (new Date()).getTime();
-      myRecord = setInterval(getMousePosition, 10);
-      function getMousePosition() {
-        var cur_time = (new Date()).getTime();
-        var time = cur_time - start_time;
-        xposstore.push(xpos);
-        yposstore.push(ypos);
-        timestamp.push(time);
-      }
-    },
+    on_load: mouseTracker.startRecording,
     choices: ["", "", "Start", "", "",],
     stimulus: [],
     button_html: function () {
@@ -1560,7 +1569,8 @@ $(document).ready(function(){
       outside_no: jsPsych.timelineVariable('outside_no')
     },
     on_finish: function (data) {
-      clearInterval(myRecord); // Stop mouse tracking
+      mouseTracker.stopRecording();
+      mouseData = mouseTracker.getData();
       // Calculate payout and colour of participant choice
       var defected = 0;
       if ( jsPsych.timelineVariable('blueLeft')() ) {
@@ -1576,11 +1586,11 @@ $(document).ready(function(){
         blueLeft : jsPsych.timelineVariable('blueLeft')(),
         ownamount: jsPsych.timelineVariable('blueLeft')() ? "right" : "left",
         defected: defected,
-        xposfinal: xpos,
-        yposfinal: ypos,
-        xposstore: xposstore,
-        yposstore: yposstore,
-        timestamp: timestamp,
+        xposfinal: mouseData.xposstore[mouseData.xposstore.length-1],
+        yposfinal: mouseData.yposstore[mouseData.yposstore.length-1],
+        xposstore: mouseData.xposstore,
+        yposstore: mouseData.yposstore,
+        timestamp: mouseData.timestamps,
       });
     },
   }
