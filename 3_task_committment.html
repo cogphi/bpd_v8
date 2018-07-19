@@ -255,6 +255,14 @@
   var yposstore = [];
   var timestamp = [];
 
+// store mouse coordinates (just one event handler, always running)
+$(document).ready(function(){
+  $(document).on('mousemove', function (e) {
+    xpos = e.pageX;
+    ypos = e.pageY;
+  })
+})
+
   // Set up misc variables
   var lasttrialdata;
   var myRecord;
@@ -749,13 +757,8 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     post_trial_gap: 500,
     on_load: function myMouseTracker() {
-      xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
+      timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
       var start_time = (new Date()).getTime();
-      document.addEventListener('mousemove', mouseCoords);
-      function mouseCoords(e) {
-        xpos = e.pageX;
-        ypos = e.pageY;
-      };
       console.log({xpos:xpos, ypos:ypos});
       myRecord = setInterval(getMousePosition, 10);
       function getMousePosition() {
@@ -1478,13 +1481,8 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     post_trial_gap: _debug ? 100 : 500,
     on_load: function myMouseTracker() {
-      xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
+      timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
       var start_time = (new Date()).getTime();
-      document.addEventListener('mousemove', mouseCoords);
-      function mouseCoords(e) {
-        xpos = e.pageX;
-        ypos = e.pageY;
-      };
       myRecord = setInterval(getMousePosition, 10);
       function getMousePosition() {
         var cur_time = (new Date()).getTime();
@@ -1575,6 +1573,7 @@
         }
       }
       jsPsych.data.get().addToLast({
+        blueLeft : jsPsych.timelineVariable('blueLeft')(),
         ownamount: jsPsych.timelineVariable('blueLeft')() ? "right" : "left",
         defected: defected,
         xposfinal: xpos,
