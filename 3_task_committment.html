@@ -651,9 +651,9 @@
     trial_duration: 3000,
     choices: ["", "Start", ""],
     button_html: [
-      '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
-      '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
-      '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+      '<div><button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+      '<div id="boxleave" ><button class="jspsych-btn-bpd-start">%choice%</button></div>',
+      '<div><button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
     response_ends_trial: true,
     stimulus: [],
     data: { test_part: "1_start_click", trial_no: jsPsych.timelineVariable('trial_no') },
@@ -665,9 +665,9 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: visible'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     choices: ["", "Start", ""],
     button_html: [
-      '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
-      '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
-      '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+      '<div><button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+      '<div id="boxleave"><button class="jspsych-btn-bpd-start">%choice%</button></div>',
+      '<div><button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
     response_ends_trial: true,
     stimulus: [],
     data: { test_part: "1_start_click_prompt", trial_no: jsPsych.timelineVariable('trial_no') },
@@ -700,9 +700,9 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>move the mouse outside the box to show choices</i></div>"],
     choices: ["", "", ""],
     button_html: [
-      '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
-      '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
-      '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+      '<div><button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+      '<div id="boxleave"><button class="jspsych-btn-bpd-start">%choice%</button></div>',
+      '<div><button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
     response_ends_trial: false,
     stimulus: [],
     data: { test_part: "2_start_leave", trial_no: jsPsych.timelineVariable('trial_no') }
@@ -720,9 +720,9 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: visible'><i>move the mouse outside the box to show choices</i></div>"],
     choices: ["", "", ""],
     button_html: [
-      '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
-      '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
-      '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+      '<div><button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+      '<div id="boxleave"><button class="jspsych-btn-bpd-start">%choice%</button></div>',
+      '<div><button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
     response_ends_trial: false,
     stimulus: [],
     data: { test_part: "2_start_leave_prompt", trial_no: jsPsych.timelineVariable('trial_no') }
@@ -784,12 +784,12 @@
     stimulus: [],
     button_html: function () {
       return [
-        '<div <button class="jspsych-btn-bpd-a" \
+        '<div><button class="jspsych-btn-bpd-a" \
               style="background-color: '+ jsPsych.timelineVariable('colora', true) + '">\
               %choice%</button></div>',
-        '<div <button class="jspsych-btn-bpd-start"\
+        '<div><button class="jspsych-btn-bpd-start"\
               style="visibility:hidden">%choice%</button></div>',
-        '<div <button class="jspsych-btn-bpd-b" \
+        '<div><button class="jspsych-btn-bpd-b" \
               style="background-color: '+ jsPsych.timelineVariable('colorb', true) + '">\
               %choice%</button></div>',
       ]
@@ -1259,9 +1259,9 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     choices: ["", "Start", ""],
     button_html: [
-      '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
-      '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
-      '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+      '<div><button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+      '<div id="boxleave"><button class="jspsych-btn-bpd-start">%choice%</button></div>',
+      '<div><button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
     response_ends_trial: true,
     stimulus: [],
     data: { test_part: "1_start_click", trial_no: jsPsych.timelineVariable('trial_no') },
@@ -1280,9 +1280,9 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>move the mouse outside the box to show choices</i></div>"],
     choices: ["", "", ""],
     button_html: [
-      '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
-      '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
-      '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+      '<div><button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+      '<div id="boxleave"><button class="jspsych-btn-bpd-start">%choice%</button></div>',
+      '<div><button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
     response_ends_trial: false,
     stimulus: [],
     data: { test_part: "2_start_leave", trial_no: jsPsych.timelineVariable('trial_no') }
@@ -1521,25 +1521,25 @@
       console.log(jsPsych.timelineVariable('a_top_no', true))
       if (jsPsych.timelineVariable('blueLeft')()) {
         return [
-          '<div <button class="jspsych-btn-bpd-trust-right-' + jsPsych.timelineVariable('button_a', true) + '" \
+          '<div><button class="jspsych-btn-bpd-trust-right-' + jsPsych.timelineVariable('button_a', true) + '" \
                     style="background-color: '+ jsPsych.timelineVariable('a_color', true) + '">\
                     <u> '+ jsPsych.timelineVariable('a_top_no', true) + '</u><br>\
                     '+ jsPsych.timelineVariable('a_bottom_no', true) + '\
                     </button></div>',
 
-          '<div <button class="jspsych-btn-bpd-trust-right-' + jsPsych.timelineVariable('button_b', true) + '" \
+          '<div><button class="jspsych-btn-bpd-trust-right-' + jsPsych.timelineVariable('button_b', true) + '" \
                     style="background-color: '+ jsPsych.timelineVariable('b_color', true) + '">\
                     <u>'+ jsPsych.timelineVariable('b_top_no', true) + '</u><br>\
                     '+ jsPsych.timelineVariable('b_bottom_no', true) + '\
                     </button></div>',
 
-          '<div <button class="jspsych-btn-bpd-start"\
+          '<div><button class="jspsych-btn-bpd-start"\
                     style="visibility:hidden">%choice%</button></div>',
 
-          '<div <button class="jspsych-btn-bpd-start"\
+          '<div><button class="jspsych-btn-bpd-start"\
                     style="visibility:hidden">%choice%</button></div>',
 
-          '<div <button class="jspsych-btn-bpd-trust-right-' + jsPsych.timelineVariable('button_c', true) + '" \
+          '<div><button class="jspsych-btn-bpd-trust-right-' + jsPsych.timelineVariable('button_c', true) + '" \
                     style="background-color: '+ jsPsych.timelineVariable('c_color', true) + '">\
                     <u>'+ jsPsych.timelineVariable('a_top_no', true) + ' or ' + jsPsych.timelineVariable('b_top_no', true) + ' </u><br>\
                     '+ jsPsych.timelineVariable('outside_no', true) + '\
@@ -1548,21 +1548,21 @@
         ]
     } else {
       return [
-        '<div <button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_c', true) + '" \
+        '<div><button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_c', true) + '" \
                   style="background-color: '+ jsPsych.timelineVariable('c_color', true) + '">\
                   <u>'+ jsPsych.timelineVariable('a_top_no', true) + ' or ' + jsPsych.timelineVariable('b_top_no', true) + ' </u><br>\
                   '+ jsPsych.timelineVariable('outside_no', true) + '\
                   </button></div>',
-        '<div <button class="jspsych-btn-bpd-start"\
+        '<div><button class="jspsych-btn-bpd-start"\
                     style="visibility:hidden">%choice%</button></div>',
-        '<div <button class="jspsych-btn-bpd-start"\
+        '<div><button class="jspsych-btn-bpd-start"\
                   style="visibility:hidden">%choice%</button></div>',
-        '<div <button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_a', true) + '" \
+        '<div><button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_a', true) + '" \
                   style="background-color: '+ jsPsych.timelineVariable('a_color', true) + '">\
                   <u> '+ jsPsych.timelineVariable('a_top_no', true) + '</u><br>\
                    '+ jsPsych.timelineVariable('a_bottom_no', true) + '\
                   </button></div>',
-        '<div <button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_b', true) + '" \
+        '<div><button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_b', true) + '" \
                   style="background-color: '+ jsPsych.timelineVariable('b_color', true) + '">\
                   <u>'+ jsPsych.timelineVariable('b_top_no', true) + '</u><br>\
                   '+ jsPsych.timelineVariable('b_bottom_no', true) + '\
