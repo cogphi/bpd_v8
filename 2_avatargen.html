@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coordination Games</title>
+
+    <script src="jspsych-6.0.4/jspsych.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-image-button-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-instructions.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-html-button-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-select.js" ></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-external-html.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-fullscreen.js"></script>
+
+    <script src="jquery-3.3.1.min.js"></script>
+
+    <script src="jspsych-6.0.4/js.cookie.js"></script>
+    <script src="functions.js"></script>
+
+    <link href="jspsych-6.0.4/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+    	<link href="svgavatars/css/normalize.css" rel="stylesheet">
+    	<link href="svgavatars/css/spectrum.css" rel="stylesheet">
+    	<link href="svgavatars/css/svgavatars.css" rel="stylesheet">
+
+    	<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700|Roboto:400,300,500,700&subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+
+    	<script src="svgavatars/js/jquery-1.10.2.min.js"></script>
+    	<script src="svgavatars/js/svg.min.js"></script>
+
+    	<script src='svgavatars/js/spectrum.min.js'></script>
+    	<script src="svgavatars/js/jquery.scrollbar.min.js"></script>
+
+    	<script src="svgavatars/js/canvg/rgbcolor.js"></script>
+    	<script src="svgavatars/js/canvg/StackBlur.js"></script>
+    	<script src="svgavatars/js/canvg/canvg.js"></script>
+
+    	<script src="svgavatars/js/svgavatars.en.js"></script>
+    	<script src="svgavatars/js/svgavatars.core.min.js"></script>
+
+
+  </head>
+
+
+    <body>
+
+      <p  class='jspsych-content'>
+        <br><br>
+        <u>These are the instructions for creating your own avatar:</u>
+        <br>
+        <br>
+        1. On the display below, use the mouse to select different options to create a cartoon avatar of yourself.
+        This avatar will represent you in the tasks that follow.
+        <br>
+        <br>
+        2. When you have finished designing your avatar, please click the <i>save</i> button.
+        <br>
+        <br>
+        3. When you have saved your avatar, please scroll down to the bottom of the page, check the box below and click to proceed.
+        <br>
+        <br>
+        4. Please try and finish your avatar within 5 minutes. We will notify when you are getting close to this time.
+        <br><br>
+      </p>
+
+    	<div id="svgAvatars"></div>
+
+      <p class='jspsych-content'>
+        <br><br><br>
+        <input type="checkbox" id="consent_checkbox" />I have finished creating my avatar and clicked save.
+        <br><br>
+        <button type="button" id="proceed" class='jspsych-btn' style="background-color:lightgrey;">Proceed to task</button>
+        <br><br>
+      </p>
+
+
+
+    </body>
+
+      <script>
+
+      var myid = Cookies.get('subject_id');
+      console.log("ID is:"+myid);
+
+      setTimeout(function () {
+        alert("Five minutes are almost up. Please finish making your avatar and click save before proceeding.");
+      }, 300000);
+
+
+      function redizzle(elem) {
+        if ($('#consent_checkbox').is(':checked')) {
+          window.location.replace("3_task_committment.html");
+        }
+        else {
+          alert("To proceed, you must check the box to show that you have made and saved your avatar");
+        }
+      };
+
+      document.getElementById("proceed").addEventListener("mousedown", redizzle);
+
+
+      /*
+            var imageexists
+            $.get("svgavatars/ready-avatars/z.png")
+                .done(function() {
+        //          alert("Image exists");
+                }).fail(function() {
+                    // Image doesn't exist - do something else.
+          //          alert("Image does not exist");
+
+                })
+      */
+
+      </script>
+
+</html>

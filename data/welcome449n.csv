@@ -1,0 +1,4 @@
+"rt","stimulus","key_press","trial_type","trial_index","time_elapsed","internal_node_id","subject_id","responses","view_history"
+"1453","<b>Welcome to this set of tasks!</b><br><br><br><br><br>Press any key to continue","32","html-keyboard-response","0","1457","0.0-0.0","welcome449n","",""
+"4078","","","survey-text","1","6540","0.0-1.0","welcome449n","{""Q0"":""222"",""Q1"":""333"",""Q2"":""mmm""}",""
+"2024","","","instructions","2","8565","0.0-2.0","welcome449n","","[{""page_index"":0,""viewing_time"":777},{""page_index"":1,""viewing_time"":493},{""page_index"":2,""viewing_time"":754}]"

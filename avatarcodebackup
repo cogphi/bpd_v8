@@ -1,0 +1,96 @@
+var avatarmaker = {
+  type: "html-button-response",
+  on_load: function(){
+    console.log(subject_name);
+    Cookies.set('subjectcookie', subject_name);
+  },
+  stimulus: ['<p>'+
+    '<br><br>'+
+    '<u>These are the instructions for creating your own avatar:</u>'+
+    '<br><br>'+
+    '1. On the display below, use the mouse to select different options to create a cartoon avatar of yourself.'+
+    'This avatar will represent you in the tasks that follow.'+
+    '<br><br>'+
+    '2. When you have finished designing your avatar, please click the <i>save</i> button. You can only save your avatar once, so please only do this when you are happy with your design.'+
+    '<br><br>'+
+    '3. When you have saved your avatar, please scroll down to the bottom of the page, check the box below and click to proceed.'+
+    '<br><br>'+
+    '4. Please try and finish your avatar within 5 minutes. We will notify when you are getting close to this time.'+
+    '<br><br>'+
+  '</p>'+
+  '<div  id="svgAvatars"></div>'+
+  '<br><br>'+
+  '<p><input type="checkbox" id="consent_checkbox" />I have finished creating my avatar and clicked save.</p>'+
+  '<br>'
+  ],
+  choices: ["Proceed"],
+  response_ends_trial: true,
+  post_trial_gap: 1000,
+};
+timeline_welcome.push(avatarmaker)
+
+
+
+var demo = {
+  type: "html-button-response",
+  stimulus: [''+
+  '<div  id="svgAvatars"></div>'],
+  choices: ["Go"],
+  response_ends_trial: true,
+  post_trial_gap: 1000,
+};
+timeline_welcome.push(demo)
+
+
+/*
+      var trial = {
+        type:'external-html',
+        url: "external_page2.html",
+        execute_script: true,
+//        cont_btn: "start",
+//        check_fn: check_consent
+      };
+      timeline_welcome.push(trial)
+*/
+      /*
+              var trial = {
+                type:'external-html',
+                url: "external_page.html",
+        //        cont_btn: "start",
+        //        check_fn: check_consent
+              };
+              timeline.push(trial)
+
+            var trial = {
+              type:'external-html',
+              url: "svgexternal_page.html",
+              check_fn: check_consent
+            };
+        */
+
+        // ALERTS:     alert("If you wish to participate, you must check the box next to the statement 'I agree to participate in this study.'");
+
+
+
+        var demo = {
+          type: "survey-multi-choice",
+          preamble: ['<br><br>'+
+            '<u>These are the instructions for creating your own avatar:</u><br><br>'+
+            '1. On the display below, use the mouse to select different options to create a cartoon avatar of yourself.<br><br>'+
+            'This avatar will represent you in the tasks that follow.'+
+            '2. When you have finished designing your avatar, please click the <i>save</i> button. You can only save your avatar once, so please only do this when you are happy with your design.<br><br>'+
+            '3. When you have saved your avatar, please scroll down to the bottom of the page, check the box below and click to proceed.<br><br>'+
+            '4. Please try and finish your avatar within 5 minutes. We will notify when you are getting close to this time.<br><br>'+
+            '<div  id="svgAvatars"></div>'+
+            '<br><br>'],
+          questions: [{prompt: "", options:["I have created my avatar and clicked save"], required: true}],
+  //        choices: ["Go"],
+          response_ends_trial: true,
+          post_trial_gap: 1000,
+        };
+        timeline_welcome.push(demo)
+
+
+
+
+  <script src="jquery-3.3.1.min.js"></script>

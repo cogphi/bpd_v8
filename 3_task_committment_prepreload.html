@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Coordination games</title>
+
+    <script src="jspsych-6.0.4/jspsych.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-image-button-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-instructions.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-html-button-response.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-select.js" ></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-survey-text-adapt.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-external-html.js"></script>
+    <script src="jspsych-6.0.4/plugins/jspsych-fullscreen.js"></script>
+
+    <script src="jquery-3.3.1.min.js"></script>
+
+    <script src="jspsych-6.0.4/js.cookie.js"></script>
+    <script src="functions.js"></script>
+
+    <link href="jspsych-6.0.4/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+
+    	<link href="svgavatars/css/normalize.css" rel="stylesheet">
+    	<link href="svgavatars/css/spectrum.css" rel="stylesheet">
+    	<link href="svgavatars/css/svgavatars.css" rel="stylesheet">
+
+    	<link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700|Roboto:400,300,500,700&subset=latin,cyrillic-ext,cyrillic,latin-ext" rel="stylesheet" type="text/css">
+
+    	<script src="svgavatars/js/jquery-1.10.2.min.js"></script>
+    	<script src="svgavatars/js/svg.min.js"></script>
+
+    	<script src='svgavatars/js/spectrum.min.js'></script>
+    	<script src="svgavatars/js/jquery.scrollbar.min.js"></script>
+
+    	<script src="svgavatars/js/canvg/rgbcolor.js"></script>
+    	<script src="svgavatars/js/canvg/StackBlur.js"></script>
+    	<script src="svgavatars/js/canvg/canvg.js"></script>
+
+    	<script src="svgavatars/js/svgavatars.en.js"></script>
+    	<script src="svgavatars/js/svgavatars.core.min.js"></script>
+
+
+  </head>
+
+    <body>
+
+    </body>
+
+      <script>
+
+
+  //    document.getElementById("subjectcookie").innerHTML = "Your partner's subject ID is:    " + 	Cookies.get('subjectcookie');
+  //    <p id="subjectcookie"></p>
+
+//// TO DO:
+// Fullscreen: switch to fullscreen on beginning experiment
+// Add block numbers to each node (in loop)
+// Embedded element for experiment: display-element-to-embed-experiment.html example
+// Do calculations for cooperation etc.
+// Pre-load media images
+// Saving data
+
+
+      var docw = window.innerWidth;
+      var doch = window.innerHeight;
+// Button size in Opensesame: x=-480 y=-352 w=128 h=128 name=OptionA
+// Start button: x=-64 y=224 w=128 h=128 name=start
+
+// Set up timeline variables; i.e. parameters for each condition
+
+
+      var timeline = [];
+      var timeline_post = [];
+      var timeline_task2 = [];
+      var timeline_post_task2 = [];
+
+      var round_1 = [];
+      var round_2 = [];
+      var round_3 = [];
+      var round_4 = [];
+
+
+      var practice_commit = [];
+      var partner_match = [];
+
+      var trust = [];
+
+
+///// COMMITMENT VARIABLES
+// ====================================================================
+
+      var timeline_variables_task_1_practice = [
+        {	trial_no: 1,	amounta: 250,	amountb: 200,	condition: -1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 250	},
+        {	trial_no: 2,	amounta: 300,	amountb: 200,	condition: -2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 300	},
+        {	trial_no: 3,	amounta: 300,	amountb: 250,	condition: -1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 300	},
+        {	trial_no: 4,	amounta: 250,	amountb: 300,	condition: -1,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 300	},
+        {	trial_no: 5,	amounta: 250,	amountb: 350,	condition: -2,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 6,	amounta: 300,	amountb: 350,	condition: -1,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 7,	amounta: 400,	amountb: 300,	condition: -2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 8,	amounta: 400,	amountb: 350,	condition: -1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 9,	amounta: 450,	amountb: 350,	condition: -2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 450	},
+        {	trial_no: 10,	amounta: 350,	amountb: 450,	condition: -2,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 450	},
+      ];
+
+      var timeline_variables_block_1 = [
+        {	trial_no: 11,	amounta: 300,	amountb: 200,	condition: -2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 300	},
+        {	trial_no: 12,	amounta: 250,	amountb: 350,	condition: -2,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 13,	amounta: 350,	amountb: 250,	condition: -2,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 14,	amounta: 300,	amountb: 400,	condition: -2,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 400	},
+        {	trial_no: 15,	amounta: 300,	amountb: 250,	condition: -1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 300	},
+        {	trial_no: 16,	amounta: 300,	amountb: 350,	condition: -1,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 17,	amounta: 350,	amountb: 300,	condition: -1,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 18,	amounta: 350,	amountb: 400,	condition: -1,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 400	},
+        {	trial_no: 19,	amounta: 300,	amountb: 300,	condition: 0,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 20,	amounta: 350,	amountb: 350,	condition: 0,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 21,	amounta: 350,	amountb: 350,	condition: 0,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 22,	amounta: 400,	amountb: 400,	condition: 0,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 23,	amounta: 350,	amountb: 300,	condition: 1,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 24,	amounta: 350,	amountb: 400,	condition: 1,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 25,	amounta: 400,	amountb: 350,	condition: 1,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 26,	amounta: 400,	amountb: 450,	condition: 1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 27,	amounta: 400,	amountb: 300,	condition: 2,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 300	},
+        {	trial_no: 28,	amounta: 350,	amountb: 450,	condition: 2,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 29,	amounta: 450,	amountb: 350,	condition: 2,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 30,	amounta: 400,	amountb: 500,	condition: 2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 31,	amounta: 450,	amountb: 300,	condition: 3,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 32,	amounta: 350,	amountb: 500,	condition: 3,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 33,	amounta: 500,	amountb: 350,	condition: 3,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 34,	amounta: 400,	amountb: 550,	condition: 3,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 35,	amounta: 500,	amountb: 300,	condition: 4,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 300	},
+        {	trial_no: 36,	amounta: 350,	amountb: 550,	condition: 4,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 37,	amounta: 550,	amountb: 350,	condition: 4,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 38,	amounta: 400,	amountb: 600,	condition: 4,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 39,	amounta: 550,	amountb: 300,	condition: 5,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 40,	amounta: 350,	amountb: 600,	condition: 5,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 41,	amounta: 600,	amountb: 350,	condition: 5,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 42,	amounta: 400,	amountb: 650,	condition: 5,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+      ];
+
+      var timeline_variables_block_2 = [
+        {	trial_no: 43,	amounta: 300,	amountb: 200,	condition: -2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 300	},
+        {	trial_no: 44,	amounta: 250,	amountb: 350,	condition: -2,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 45,	amounta: 350,	amountb: 250,	condition: -2,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 46,	amounta: 300,	amountb: 400,	condition: -2,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 400	},
+        {	trial_no: 47,	amounta: 300,	amountb: 250,	condition: -1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 300	},
+        {	trial_no: 48,	amounta: 300,	amountb: 350,	condition: -1,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 49,	amounta: 350,	amountb: 300,	condition: -1,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 50,	amounta: 350,	amountb: 400,	condition: -1,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 400	},
+        {	trial_no: 51,	amounta: 300,	amountb: 300,	condition: 0,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 52,	amounta: 350,	amountb: 350,	condition: 0,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 53,	amounta: 350,	amountb: 350,	condition: 0,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 54,	amounta: 400,	amountb: 400,	condition: 0,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 55,	amounta: 350,	amountb: 300,	condition: 1,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 56,	amounta: 350,	amountb: 400,	condition: 1,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 57,	amounta: 400,	amountb: 350,	condition: 1,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 58,	amounta: 400,	amountb: 450,	condition: 1,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 59,	amounta: 400,	amountb: 300,	condition: 2,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 300	},
+        {	trial_no: 60,	amounta: 350,	amountb: 450,	condition: 2,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 61,	amounta: 450,	amountb: 350,	condition: 2,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 62,	amounta: 400,	amountb: 500,	condition: 2,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 63,	amounta: 450,	amountb: 300,	condition: 3,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 64,	amounta: 350,	amountb: 500,	condition: 3,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 65,	amounta: 500,	amountb: 350,	condition: 3,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 66,	amounta: 400,	amountb: 550,	condition: 3,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 67,	amounta: 500,	amountb: 300,	condition: 4,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 300	},
+        {	trial_no: 68,	amounta: 350,	amountb: 550,	condition: 4,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 69,	amounta: 550,	amountb: 350,	condition: 4,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 350	},
+        {	trial_no: 70,	amounta: 400,	amountb: 600,	condition: 4,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 400	},
+        {	trial_no: 71,	amounta: 550,	amountb: 300,	condition: 5,	colora: '#ffaa00',	colorb: '#0064ff',	computeramount: 300	},
+        {	trial_no: 72,	amounta: 350,	amountb: 600,	condition: 5,	colora: '#0064ff',	colorb: '#ffaa00',	computeramount: 350	},
+        {	trial_no: 73,	amounta: 600,	amountb: 350,	condition: 5,	colora: '#ffaa00',	colorb: '#00ff7f',	computeramount: 350	},
+        {	trial_no: 74,	amounta: 400,	amountb: 650,	condition: 5,	colora: '#00ff7f',	colorb: '#ffaa00',	computeramount: 400	},
+      ];
+// ===============================================================================
+
+///// TRUST VARIABLES
+// ====================================================================
+      var timeline_variables_task_2_practice = [
+        {	trial_no:1,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:2,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:3,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:4,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:5,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:6,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:7,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:8,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:9,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:10,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+      ];
+
+      var timeline_variables_block_3 =  [
+        {	trial_no:11,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:12,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:13,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:14,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:15,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:16,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:17,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:18,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:19,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:20,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:21,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:22,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:23,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:24,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:25,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:26,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:27,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:28,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:29,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:30,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:31,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:32,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:33,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:34,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:35,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:36,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:37,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:38,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:39,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:40,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:41,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:42,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+      ];
+
+      var timeline_variables_block_4 =  [
+        {	trial_no:43,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:44,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:45,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:46,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-2,	a_top_no:400,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:47,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:48,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:49,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:50,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:-1,	a_top_no:450,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:51,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:52,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:53,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:54,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:0,	a_top_no:500,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:55,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:56,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:57,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:58,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:1,	a_top_no:550,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:59,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:60,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:61,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:62,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:2,	a_top_no:600,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:63,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:64,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:65,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:66,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:3,	a_top_no:650,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:67,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:68,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:69,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:70,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:4,	a_top_no:700,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:71,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:72,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:73,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:400,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+        {	trial_no:74,	button_a:"a",	button_b:"b",	button_c:"c",	button_d:"d",	condition:5,	a_top_no:750,	b_top_no:500,	a_bottom_no:0,	b_bottom_no:500,	outside_no:200,	a_color:'#0064ff',	b_color:'#00ff7f',	c_color:'#ffaa00',	d_color:'#ffaa00',	},
+      ];
+// ===============================================================================
+// Set up mousetracking variables
+      var xpos;
+      var ypos;
+      var timefinal;
+      var xposstore = [];
+      var yposstore = [];
+      var timestamp = [];
+      var mousePos;
+
+// Set up misc variables
+      var lasttrialdata;
+      var myRecord;
+
+// Set up avatar variables
+      var avatarsource = "svgavatars/ready-avatars/";
+      var partnersource = "svgavatars/ready-avatars/partner";
+
+    //  var thisme = "svgavatars/ready-avatars/"+"me.png";
+      var thispartner_auto = avatarsource+"partner_auto.png";
+      var thispartner_auto_2 = avatarsource+"partner_auto_2.png";
+
+      var sizing_img = 200;
+      var sizing_font = 14;
+      var choices_names = ["Partner 1", "Partner 2", "Partner 3", "Partner 14", "Partner 5", "Partner 6", "Partner 7", "Partner 8", "Partner 9", "Partner 10"];
+
+      var thispartner1 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner1.png'></img>"+
+                            "<p style='font-size:"+sizing_font+"'>"+
+                              "<b>Film</b>: Can\'t wait for the Game of Thrones movie. In the meantime, I\'ll be keeping an eye out for the next Marvel."+
+                              "<br><b>Music</b>: Anything with a big beat like Dance, Trance and a bit of R&B. Basically anything that will fill the floor in the club. Avicii RIP"+
+                              "<br><b>Food</b>: A mix of cooking and going out. I do a mean steak and like the odd pasty."+
+                              "<br><br><br>"
+                            "</p>";
+
+      var thispartner2 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner2.png'></img>"+
+                            "<p style='font-size:"+sizing_font+"'>"+
+                              "<b>Film</b>: Love a good chick flick, all the classics. Top of the list: When Harry met Sally."+
+                              "<br><b>Music</b>: Poppy things like Ed Sheeren and Taylor Swift."+
+                              "<br><b>Food</b>: I have Spanish family. I can make a good paella"+
+                              "<br><br><br>>"
+                            "</p>";
+
+
+      var thispartner3 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner3.png'></img>"+
+                            "<p style='font-size:"+sizing_font+"'>"+
+                              "<b>Film</b>: Currently working through the top 100 films to see before you die. Wasn\'t impressed by the Seven Samurais but surprisingly enjoyed Breakfast at Tiffany\'"+
+                              "<br><b>Music</b>: I like things a little jazzy and soulful. Billie Holliday and Nina Simone."+
+                              "<br><b>Food</b>: Proper Italian. Pasta and pizza works for me."+
+                              "<br><br><br>"
+                            "</p>";
+
+      var thispartner4 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner4.png'></img>"+
+                            "<p style='font-size:"+sizing_font+"'>"+
+                              "<b>Film</b>: Reality tv like The Great British Bake Off and Naked Attractions. I\'m obsessed with Love Island at the moment."+
+                              "<br><b>Music</b>: I\'m always making pop playlists full of things like George Ezra and Ariana Grande."+
+                              "<br><b>Food</b>: Healthy eating in the week, prosecco at the weekend"+
+                              "<br><br><br>"
+                            "</p>";
+
+
+      var thispartner5 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner5.png'></img>"+
+                            "<p style='font-size:"+sizing_font+"'>"+
+                              "<b>Film</b>: I love true crime documentaries like Making a Murderer and The Staircase."+
+                              "<br><b>Music</b>: A mix of rock, folk and blues. Bruce Springsteen and Dave Mathews are my favourite."+
+                              "<br><b>Food</b>: I love experimenting with different cuisines. My signature home-cooked dish is the Japanese poke bowl and Thai duck curry."+
+                              "<br><br><br>"
+                            "</p>";
+
+
+        var thispartner6 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner6.png'></img>"+
+                              "<p style='font-size:"+sizing_font+"'>"+
+                                "<b>Film</b>: Nick Cage in Face Off is dope or Planet of the Apes #lovethemapes."+
+                                "<br><b>Music</b>: Rhianna\'s Wild Thoughts. I\'m not even sorry. "+
+                                "<br><b>Food</b>: Anything I can Insta. Love good pub grub."+
+                                "<br><br><br>"
+                              "</p>";
+
+        var thispartner7 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner7.png'></img>"+
+                              "<p style='font-size:"+sizing_font+"'>"+
+                                "<b>Film</b>: Things with a historical edge and if they ever make a Peaky Blinders film I\'m there."+
+                                "<br><b>Music</b>: Something I can sing in the car to. Constantly have Kiss FM on."+
+                                "<br><b>Food</b>: I love a good picnic with the family."+
+                                "<br><br><br>"
+                              "</p>";
+
+        var thispartner8 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner8.png'></img>"+
+                              "<p style='font-size:"+sizing_font+"'>"+
+                                "<b>Film</b>: I like a good tear jerker. Gerard Butler in PS I Love You and Ryan Gosling in The Notebook."+
+                                "<br><b>Music</b>: I like mushy romantic ballads. Simply Red is my guilty pleasure."+
+                                "<br><b>Food</b>: Asian food like Vietnamese Pho but I also found an amazing Chilean food stall recently."+
+                                "<br><br><br>"
+                              "</p>";
+
+        var thispartner9 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner9.png'></img>"+
+                              "<p style='font-size:"+sizing_font+"'>"+
+                                "<b>Film</b>: I like everything from epic like Lord of the Rings to quirky like Grand Budapest hotel."+
+                                "<br><b>Music</b>: A strong indie feel (The Smiths, Talking Heads) and a sprinkling of lame pop - Girls Just Wanna Have Fun is a tune."+
+                                "<br><b>Food</b>: I\'m veggie so stir frys and Thai food all the way. My veggie chilli game is strong."+
+                                "<br><br><br>"
+                              "</p>";
+
+        var thispartner10 = "<br><img style='width:"+sizing_img+"; float:left' src='svgavatars/ready-avatars/partner10.png'></img>"+
+                              "<p style='font-size:"+sizing_font+"'>"+
+                                "<b>Film</b>:  I get bored easily so action movies. The Expendables really did it for me. The Avengers kept me occupied too."+
+                                "<br><b>Music</b>: Rock and heavy metal. I\'m a big Metallica fan. I struggle with Justin Bieber."+
+                                "<br><b>Food</b>: The more meat and grease the better! Love a good burger. Pizza and Chinese with the boys come a close second. "+
+                                "<br><br><br>"
+                              "</p>";
+
+      var choices = [thispartner1, thispartner2, thispartner3, thispartner4, thispartner5];
+      var choices_2 = [thispartner6, thispartner7, thispartner8, thispartner9, thispartner10];
+
+      var chose1_ind = 0;
+      var chose2_ind = 0;
+      var chose3_ind = 0;
+      var chose4_ind = 0;
+      var chose5_ind = 0;
+      var chose6_ind = 0;
+      var chose7_ind = 0;
+      var chose8_ind = 0;
+      var chose9_ind = 0;
+      var chose10_ind = 0;
+
+      var thispartner_choice = partnersource+"_auto.png";
+
+      var myid = Cookies.get('subject_id');
+      var thisme = avatarsource+myid+".png";
+
+//      var thisme = avatarsource+"me.png";
+
+      console.log(myid);
+
+      function saveData(filename, filedata){
+         $.ajax({
+            type:'post',
+            cache: false,
+            url: 'write_data.php',
+            data: {filename: filename, filedata: filedata}
+         });
+      }
+
+//      var rando = "welcome"+(Math.random()+"").replace("0.","");
+
+// AFTER CREATING OWN AVATAR
+// ==============================================================================================
+
+      jsPsych.data.addProperties({
+        subject: myid,
+        docw: docw,
+        doch:doch,
+      });
+
+    // Final avatar result
+        var avatar_info = {
+          type: "html-button-response",
+          stimulus: "Now that you've created your avatar, please could you answer the three questions in the pages that follow to provide a short description of yourself. "+
+          "<br><br>These will be shared with potential partners in your interactions in the upcoming tasks, while theirs will be shared with you.<br></p>"+
+          "Please click the button at the bottom of the page to continue.<br></p>",
+          choices: ['Continue'],
+          response_ends_trial: true,
+          post_trial_gap: 750,
+          };
+      timeline.push(avatar_info);
+
+                var avatar_info_1 = {
+                    type: 'survey-text-adapt',
+                    preamble: "Question 1:<br><br>",
+                    questions: [
+                      {prompt: 'What types of film do you enjoy watching, or what is your favourite film?<br><br><i>(e.g. I like thrillers, basically something where there\'s someone\'s head to get inside like Shutter Island.)<br><br></i>', columns: 50, rows: 2},
+                    ],
+                    post_trial_gap: 750,
+                    on_finish: function(data){
+                      var lasttrialdata = jsPsych.data.getLastTrialData();
+                      var q1response = lasttrialdata.values()[0].responses;
+                      var q1film = q1response.slice(7,-2);
+                      jsPsych.data.get().addToLast({
+                        q1film: q1film,
+                      });
+                    }
+                };
+              timeline.push(avatar_info_1);
+
+              var avatar_info_2 = {
+                  type: 'survey-text-adapt',
+                  preamble: "Question 2:<br><br>",
+                  questions: [
+                    {prompt: 'What types of music you enjoy listening to, or who is your favourite band?<br><br><i>(e.g. I\'m into all sorts. I can dance to everything from R&B to jazz.)<br><br></i>', columns: 50, rows: 2},
+                  ],
+                  post_trial_gap: 750,
+                  on_finish: function(data){
+                    var lasttrialdata = jsPsych.data.getLastTrialData();
+                    var q2response = lasttrialdata.values()[0].responses;
+                    var q2music = q2response.slice(7,-2);
+                    jsPsych.data.get().addToLast({
+                      q2music: q2music,
+                    });
+                  }
+              };
+            timeline.push(avatar_info_2);
+
+
+              var avatar_info_3 = {
+                  type: 'survey-text-adapt',
+                  preamble: "Question 3:<br><br>",
+                  questions: [
+                    {prompt: 'What types of food do you enjoy eating, or what is your favourite meal?<br><br><i>(e.g. I like to cook at home a lot. I\'m currently trying to perfect a duck dish from India.)<br><br></i>', columns: 50, rows: 2},
+                  ],
+                  post_trial_gap: 750,
+                  on_finish: function(data){
+                    var lasttrialdata = jsPsych.data.getLastTrialData();
+                    var q3response = lasttrialdata.values()[0].responses;
+                    var q3food = q3response.slice(7,-2);
+                    jsPsych.data.get().addToLast({
+                      q3food: q3food,
+                    });
+                  }
+              };
+            timeline.push(avatar_info_3);
+
+      // Final avatar result
+      var ownavatar = {
+        type: "html-button-response",
+        stimulus: function(){
+        var q1film = jsPsych.data.get().last(3).values()[0].q1film;
+        var q2music = jsPsych.data.get().last(2).values()[0].q2music;
+        var q3food = jsPsych.data.get().last(1).values()[0].q3food;
+
+        var showavatar =   "<br><br><div><img src='"+thisme+"' alt='blinking!'></img><br></div>"+
+          "<br><b>Films:</b>  "+q1film+"  "+
+          "<br><b>Music:</b>  "+q2music+"  "+
+          "<br><b>Food:</b>   "+q3food+"  "+
+          "<br><br>Well done!!<br>You've created your own avatar and provided a description of yourself, which will represent you as you interact with partners in the tasks that follow.<br><br>"+
+          "Please click the button below to continue to Part 2.<br><br>"
+        return showavatar
+        },
+        //stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"+
+        choices: ['Continue'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+    timeline.push(ownavatar);
+
+// INSTRUCTIONS
+// ==============================================================================================
+  // Instructions for Task 1 (commitment)
+      var instructions_choose = {
+        type: 'instructions',
+        pages: ['<b>Welcome to Task 1</b><br><br>'+
+          'Please click the button below to learn the instructions for this task.',
+          '<button class="jspsych-btn" style="background-color:#0064ff; font-size:25">____</button> <button class="jspsych-btn" style="background-color:#00ff7f; font-size:25">____</button><br><br>'+
+            'You will play a number of rounds of a game with a partner. In each round, your partner will first choose between two values, indicated in either blue or green like in the options above. <br><br>'+
+            'You will not be shown both of the choices your partner is presented with. You will only see the value they chose, but not the alternative.',
+          '<button class="jspsych-btn" style="background-color:#0064ff; font-size:25">____</button>  /  <button class="jspsych-btn" style="background-color:#00ff7f; font-size:25">____</button><br><br>'+
+          '& <br><br><button class="jspsych-btn" style="background-color:#ffaa00; font-size:25">____</button><br><br>'+
+            'Then, it will be your turn to choose between two values: a green/ blue value (which was just selected by your partner), and an orange value (which is always a different value). Your partner will not see the choice you make.<br><br>'+
+            'If you choose the <b>green/blue</b> value, you and your partner each get the same number of points shown by that value.<br><br>'+
+            'If you choose the <b>orange</b> value, you get the number of points shown by that value, while your partner gets no points.<br><br>'+
+            'Your choices will thus determine not only your own gains but also your partner\'s.',
+          'At the end of the experiment one round will be randomly selected from this task and you will be paid an amount of money equivalent to the points you earned in that round. The more points you earn, the greater your payout.'+
+            'The same is true for your partner: they will get a payment based on how many points they earned in the selected round.<br><br>'+
+            'In addition, your and your partner\'s earnings will be influenced by how quickly each of you completes your tasks.',
+          'The task is divided into two parts.<br><br>'+
+            'In the first part, you will play with a partner that will be randomly assigned to you.<br><br>'+
+              'In the second part, you will have an opportunity to choose a partner to play with.',
+            'Click the button below to see which partner you are matched with for the first part.'
+        ],
+        show_clickable_nav: true,
+        show_page_number: true
+      };
+    timeline.push(instructions_choose);
+
+
+  // Matching: waiting for automatic partner
+            var partner_matching_wait_1_auto = {
+              type: "html-keyboard-response",
+              stimulus:
+              '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button> '+
+              '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button> '+
+              '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button>'+
+              '<br><br>'+
+//              "<div class='float: center;'><img src='img/waiting.gif'></img></div>"+
+              "<br>Please wait while we gather participants together and group you into teams...",
+              response_ends_trial: false,
+              trial_duration: 2500,
+            };
+          timeline.push(partner_matching_wait_1_auto);
+
+                  var partner_matching_wait_2_auto = {
+                    type: "html-keyboard-response",
+                    stimulus:
+                    '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+                    '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button> '+
+                    '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button>'+
+                    '<br><br>'+
+                    "<br>Please wait while we gather participants together and group you into teams...",
+                    response_ends_trial: false,
+                    trial_duration: 2000,
+                  };
+                timeline.push(partner_matching_wait_2_auto);
+
+                var partner_matching_wait_3_auto = {
+                  type: "html-keyboard-response",
+                  stimulus:
+                  '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+                  '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+                  '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button>'+
+                  '<br><br>'+
+                  "<br>Please wait while we gather participants together and group you into teams...",
+                  response_ends_trial: false,
+                  trial_duration: 3000,
+                };
+              timeline.push(partner_matching_wait_3_auto);
+
+              var partner_matching_wait_4_auto = {
+                type: "html-keyboard-response",
+                stimulus:
+                '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+                '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+                '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button>'+
+                '<br><br>'+
+                "<br>Please wait while we gather participants together and group you into teams...",
+                response_ends_trial: false,
+                trial_duration: 2500,
+                post_trial_gap: 1000,
+              };
+              timeline.push(partner_matching_wait_4_auto);
+
+  // Matching: displaying automatic partner
+      var partner_matching_auto = {
+        type: "html-button-response",
+        stimulus: "<div><img src='"+thispartner_auto+"'></img><br><br></div>"+
+        "<p>The partner you have been matched with is: <b>Player 11</b>.<br><br> Click the button below to read the instructions for the task that follows.<br><br></p>",
+      //        stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"+
+        choices: ['Begin'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+    timeline.push(partner_matching_auto);
+
+
+  // Practice: instructions before
+      var instructions_practice_pre = {
+        type: "html-button-response",
+        stimulus: "<p>As described earlier, in this task your partner will first make a choice. You will then have to make a choice between two options. A reminder that your partner will not see which choice you make.<br><br>"+
+        "To complete your task you must:<br>"+
+        "1. Click the <i>start</i> button<br>"+
+        "2. <i>Move the mouse cursor</i> out of the grey box to reveal your two options<br>"+
+        "3. Use the mouse to <i>click</i> on your choice"+
+        '<br><br> Before you begin the task, you and your partner have several rounds for practice. These are to make you familiar with the task and you are not able to earn points in them.'+
+        "<br><br> Click the button below to begin the practice session.</p>",
+        choices: ['Begin practice'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+      timeline.push(instructions_practice_pre);
+
+
+  // Practice: instructions after
+      var instructions_practice_post = {
+        type: "html-button-response",
+        stimulus: "<p>You have finished the practice rounds. <br><br>"+
+        "Now, in the task that follows, you have the opportunity to earn points and earn money. "+
+        "At the end of the experiment one round will be randomly selected from this task and you will be paid an amount of money equivalent to the points you earned in that round. The more points you earn, the greater your payout.<br><br>"+
+        "When you are ready, click the button to begin the task with your assigned partner.<br><br>",
+      //        stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"
+        choices: ['Begin task'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+//      timeline.push(instructions_practice_post);
+
+
+// TEST PROCEDURE
+// ==============================================================================================
+
+  //// Wait for partner to make a choice
+      var partner_choice_waiting_auto = {
+        type: "html-keyboard-response",
+        stimulus: "<div><img src='"+thispartner_auto+"'></img><br><br></div>"+
+        "<div class='float: center;'><img src='img/waiting.gif'></img></div>"+
+        "<br>Please wait while your partner makes their choice...",
+        response_ends_trial: false,
+        trial_duration: function(){
+          return jsPsych.randomization.sampleWithoutReplacement([1500, 2000], 1)[0];
+      // what does this ,1 mean?
+        },
+        post_trial_gap: 750,
+        data: {partner: thispartner_auto},
+      };
+
+
+  //// Click the button to start the trial
+      var start_click = {
+        type: 'html-button-response',
+        prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
+        trial_duration: 3000,
+        choices: ["", "Start", ""],
+        button_html: [
+          '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+          '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
+          '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+        response_ends_trial: true,
+        stimulus: [],
+        data: {test_part: "1_start_click", trial_no: jsPsych.timelineVariable('trial_no')},
+      };
+
+        //// Timeout on click the button
+              var start_click_prompt = {
+                type: 'html-button-response',
+                prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: visible'><i>click the start button and move the mouse outside the box to begin</i></div>"],
+                choices: ["", "Start", ""],
+                button_html: [
+                  '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+                  '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
+                  '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+                response_ends_trial: true,
+                stimulus: [],
+                data: {test_part: "1_start_click_prompt", trial_no: jsPsych.timelineVariable('trial_no')},
+              };
+
+  // If no button pressed (i.e. == null) then
+        var if_start_prompt = {
+         timeline: [start_click_prompt],
+         data: {test_part: 'if_start_prompt'},
+         conditional_function: function(){
+           var data = jsPsych.data.get().last(1).values()[0];
+           if(data.button_pressed == null){
+             return true;
+           } else {
+             return false;
+           }
+          }
+        }
+
+  //// Move the mouse to reveal options
+      var start_leave = {
+        on_load: function() {
+          function mouseLeave() {
+            jsPsych.finishTrial({correct_response: true, intime: "yes"});
+            }
+          document.getElementById("boxleave").addEventListener("mouseleave", mouseLeave);
+        },
+        type: 'html-button-response',
+        trial_duration: 3000,
+        prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>move the mouse outside the box to show choices</i></div>"],
+        choices: ["", "", ""],
+        button_html: [
+          '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+          '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
+          '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+        response_ends_trial: false,
+        stimulus: [],
+        data: {test_part: "2_start_leave", trial_no: jsPsych.timelineVariable('trial_no')}
+        };
+
+    //// Move the mouse to reveal options
+            var start_leave_prompt = {
+              on_load: function() {
+                function mouseLeave() {
+                  jsPsych.finishTrial({correct_response: true});
+                  }
+                document.getElementById("boxleave").addEventListener("mouseleave", mouseLeave);
+              },
+              type: 'html-button-response',
+              prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: visible'><i>move the mouse outside the box to show choices</i></div>"],
+              choices: ["", "", ""],
+              button_html: [
+                '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+                '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
+                '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+              response_ends_trial: false,
+              stimulus: [],
+              data: {test_part: "2_start_leave_prompt", trial_no: jsPsych.timelineVariable('trial_no')}
+              };
+
+      var if_leave_prompt = {
+       timeline: [start_leave_prompt],
+       data: {test_part: 'if_leave_prompt'},
+       conditional_function: function(){
+         var data = jsPsych.data.get().last(1).values()[0];
+         if(data.intime == "yes"){
+           return false;
+         } else {
+           return true;
+         }
+        }
+      }
+
+
+  //// Choose between the two options
+      var choices_trial = {
+        type: 'html-button-response',
+        trial_duration: 3000,
+        response_ends_trial: true,
+        prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
+        post_trial_gap: 500,
+        on_load: function myMouseTracker() {
+            xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; mousePos = 0;
+            var start_time = (new Date()).getTime();
+            document.addEventListener('mousemove', mouseCoords);
+            function mouseCoords(e) {
+              xpos = e.pageX;
+              ypos = e.pageY;
+              // Another way, using an object
+                mousePos = {
+                  x: e.pageX,
+                  y: e.pageY};
+            };
+            console.log(mousePos);
+            myRecord = setInterval(getMousePosition, 10);
+            function getMousePosition() {
+              var pos = mousePos;
+              var cur_time = (new Date()).getTime();
+              var time = cur_time - start_time;
+              if (!pos) {}
+              else {
+                  xposstore.push(xpos);
+                  yposstore.push(ypos);
+                  timestamp.push(time);}
+            }
+          },
+        choices: [jsPsych.timelineVariable('amounta'), "Start", jsPsych.timelineVariable('amountb')],
+        stimulus: [],
+        button_html: function(){ return [
+          '<div <button class="jspsych-btn-bpd-a" \
+              style="background-color: '+ jsPsych.timelineVariable('colora', true) +'">\
+              %choice%</button></div>',
+          '<div <button class="jspsych-btn-bpd-start"\
+              style="visibility:hidden">%choice%</button></div>',
+          '<div <button class="jspsych-btn-bpd-b" \
+              style="background-color: '+ jsPsych.timelineVariable('colorb', true) +'">\
+              %choice%</button></div>',
+          ]},
+        data: {test_part: '3_choice', trial_no: jsPsych.timelineVariable('trial_no'), condition: jsPsych.timelineVariable('condition'), amounta: jsPsych.timelineVariable('amounta'), amountb:jsPsych.timelineVariable('amountb'),
+          colora: jsPsych.timelineVariable('colora'), colorb: jsPsych.timelineVariable('colorb'), computeramount: jsPsych.timelineVariable('computeramount')},
+        on_finish: function(data) {
+            clearInterval(myRecord); // Stop mouse tracking
+            // Calculate payout and colour of participant choice
+            var yourpayout = 0;
+            var yourcolor = "";
+            if (data.button_pressed == "0") {
+              yourpayout =  jsPsych.timelineVariable('amounta', true);
+              yourcolor = jsPsych.timelineVariable('colora', true)
+            };
+            if (data.button_pressed == "2") {
+              yourpayout = jsPsych.timelineVariable('amountb', true);
+              yourcolor = jsPsych.timelineVariable('colorb', true)
+            };
+          // Set computer payout to 0 and only change it if cooperative option (green or blue) was selected
+          var computerpayout = 0;
+            if ((jsPsych.timelineVariable('colora', true) == ('#00ff7f') || jsPsych.timelineVariable('colora', true) == ('#0064ff')) && (data.button_pressed == "0")) {
+              computerpayout = yourpayout
+            };
+            if ((jsPsych.timelineVariable('colorb', true) == ('#00ff7f') || jsPsych.timelineVariable('colorb', true) == ('#0064ff')) && (data.button_pressed == "2")) {
+              computerpayout = yourpayout
+            };
+          var computercolor = "";
+            if ((jsPsych.timelineVariable('colora', true) == ('#00ff7f') || jsPsych.timelineVariable('colora', true) == ('#0064ff')) && (computeramount = jsPsych.timelineVariable('amounta', true))) {
+              computercolor = jsPsych.timelineVariable('colora', true)
+            };
+            if ((jsPsych.timelineVariable('colorb', true) == ('#00ff7f') || jsPsych.timelineVariable('colorb', true) == ('#0064ff')) && (computeramount = jsPsych.timelineVariable('amounta', true))) {
+              computercolor = jsPsych.timelineVariable('colorb', true)
+            };
+          // Cooperation = true if computer paid out; i.e. cooperative option chosen
+          data.cooperate = (computerpayout > 0);
+          jsPsych.data.get().addToLast({
+            yourpayout: yourpayout,
+            yourcolor: yourcolor,
+            computerpayout: computerpayout,
+            computercolor: computercolor,
+            xposfinal: xpos,
+            yposfinal: ypos,
+            xposstore: xposstore,
+            yposstore: yposstore,
+            timestamp: timestamp,
+          });
+        },
+      }
+
+
+        var timeout = {
+          type: "html-keyboard-response",
+          stimulus:
+            "<div><i>You didn't respond within 3 seconds. Please try to respond faster next time!</i></div>",
+          response_ends_trial: true,
+          trial_duration: 2500,
+          post_trial_gap: 500,
+          data: {test_part: "choice_timeout", timedout: "yes"}
+        };
+
+// If no button pressed (i.e. == null) then
+      var if_choice = {
+       timeline: [timeout],
+       data: {test_part: '17_if_choice'},
+       conditional_function: function(){
+         var data = jsPsych.data.get().last(1).values()[0];
+         if(data.button_pressed == null){
+           return true;
+         } else {
+           return false;
+         }
+       }
+     }
+
+
+//       timeline: [partner_choice_waiting_auto, start_click, if_start_prompt, start_leave, if_leave_prompt, choices_trial, if_choice],
+
+      var loop_choice_1 = {
+       timeline: [partner_choice_waiting_auto, start_click, if_start_prompt, start_leave, if_leave_prompt, choices_trial, if_choice],
+       data: {test_part: '17_loop_choice_1'},
+       loop_function: function(){
+         var data = jsPsych.data.get().last(1).values()[0];
+         if(data.timedout == "yes"){
+           return true;
+         } else {
+           return false;
+         }
+       }
+     }
+
+
+    //// Get feedback on choice
+      var feedback_auto = {
+        type: 'html-keyboard-response',
+        response_ends_trial: false,
+        trial_duration: 3000,
+        post_trial_gap: 500,
+        data: {test_part: '4_feedback_auto', trial_no: jsPsych.timelineVariable('trial_no')},
+        stimulus: function() {
+          var lasttrialdata = jsPsych.data.getLastTrialData();
+          var yourpayout = lasttrialdata.values()[0].yourpayout;
+          var computerpayout = lasttrialdata.values()[0].computerpayout;
+          var computeramount = lasttrialdata.values()[0].computeramount;
+          var yourcolor = lasttrialdata.values()[0].yourcolor;
+          var computercolor = lasttrialdata.values()[0].computercolor;
+          var resultstable =
+            '<table>\
+              <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+              <tr><td> <img width="130" src="'+thisme+'"></img> </td>\
+                <th>Your choice</th><td>=</td>\
+                <td style = "background-color: '+yourcolor+'"><b>'+yourpayout+'<b></td></tr>\
+              <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+              <tr><td> <img width="130" src="'+thispartner_auto+'"></img> </td>\
+                <th>Your partners choice</th><td>=</td>\
+                <td style = "background-color: '+computercolor+';"><b>'+computeramount+'<b></td></tr>\
+              <tr><th></th> <td></td> <td></td><td></td></tr>\
+              <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;">\
+                <th style="color:red">REWARDS</th><td></td><td></td><td><br></td></tr>\
+              <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+              <tr>\
+                <th style = "font-size: 30px;">You</th>\
+                <td style = "font-size: 30px;"><b>'+yourpayout+'<b></td><td></td><td><br></td></tr>\
+              <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+              <tr>\
+                <th style = "font-size: 30px;">Your partner</th>\
+                <td style = "font-size: 30px;"><b>'+computerpayout+'<b></td><td></td><td><br></td></tr>\
+              <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+            </table>';
+            return resultstable
+//XX Include partner and self pictures within the feedback table
+          },
+        }
+
+      round_1.push(loop_choice_1, feedback_auto)
+
+
+
+// BLOCK 2: PARTNER ACCEPTANCE OR REJECTION
+// ==============================================================================================
+
+  // Practice: instructions after
+      var instructions_break = {
+        type: "html-button-response",
+        stimulus: "<p>You have finished the first part of this task.<br><br>"+
+        "Now, before you complete the remainder, you have an opportunity to select partners you would like to play with. "+
+        "Once you have made your decision, we will re-match you with a partner who you will complete the task with.<br><br>"+
+        "When you are ready, click the button to choose your partners.<br><br></p>",
+      //        stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"
+        choices: ['Select partners'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+      timeline_post.push(instructions_break);
+
+
+
+// Choosing a partner
+      var choosing_partners = {
+       type: 'survey-multi-select',
+       questions: [{prompt: "By reading about them and then clicking on their avatars to select, please choose <b>3 partners</b> you would like to work with in the task that follows.<br><br>"+
+       "You can unselect a partner by clicking on their image again. When you are finished, click on the continue button at the bottom of the screen",
+       options: choices, horizontal: false}],
+       required: true,
+       post_trial_gap: 1000,
+       on_finish: function(data) {
+   // Indicators for whether they selected partner :: names must align to img/ sources
+      // True if they chose the partner
+       var chose1 = (data.responses.includes("partner1"));
+       var chose2 = (data.responses.includes("partner2"));
+       var chose3 = (data.responses.includes("partner3"));
+       var chose4 = (data.responses.includes("partner4"));
+       var chose5 = (data.responses.includes("partner5"));
+    // Ind = 1 if they chose the partner
+       if (chose1 == true) {chose1_ind = 1};
+       if (chose2 == true) {chose2_ind = 1};
+       if (chose3 == true) {chose3_ind = 1};
+       if (chose4 == true) {chose4_ind = 1};
+       if (chose5 == true) {chose5_ind = 1};
+    // Array of partners they DID choose
+       var group_chosen =[];
+       if (chose1_ind == 1) [group_chosen.push(1)];
+       if (chose2_ind == 1) [group_chosen.push(2)];
+       if (chose3_ind == 1) [group_chosen.push(3)];
+       if (chose4_ind == 1) [group_chosen.push(4)];
+       if (chose5_ind == 1) [group_chosen.push(5)];
+    // Array of partners they DID NOT choose
+       var group_notchosen =[];
+       if (chose1_ind == 0) [group_notchosen.push(1)];
+       if (chose2_ind == 0) [group_notchosen.push(2)];
+       if (chose3_ind == 0) [group_notchosen.push(3)];
+       if (chose4_ind == 0) [group_notchosen.push(4)];
+       if (chose5_ind == 0) [group_notchosen.push(5)];
+
+       var partner_accept;
+       var partner_reject;
+
+       var partner_accept = group_chosen[Math.floor(Math.random()*group_chosen.length)];
+       var partner_reject = group_notchosen[Math.floor(Math.random()*group_notchosen.length)];
+
+       var noofpartners = group_chosen.length;
+
+       jsPsych.data.get().addToLast({
+         noofpartners: noofpartners,
+         chose1: chose1,
+         chose2: chose2,
+         chose3: chose3,
+         chose4: chose4,
+         chose5: chose5,
+         chose1_ind: chose1_ind,
+         chose2_ind: chose2_ind,
+         chose3_ind: chose3_ind,
+         chose4_ind: chose4_ind,
+         chose5_ind: chose5_ind,
+         group_chosen: group_chosen,
+         group_notchosen: group_notchosen,
+         partner_accept: partner_accept,
+         partner_reject: partner_reject,
+         partner_accept_task1: partner_accept,
+         });
+         }
+      };
+    timeline_post.push(choosing_partners);
+
+      // Matching: waiting for automatic partner
+      var partner_matching_wait_1 = {
+        type: "html-keyboard-response",
+        stimulus:
+        '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button> '+
+        '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button> '+
+        '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button>'+
+        '<br><br>'+
+//              "<div class='float: center;'><img src='img/waiting.gif'></img></div>"+
+        "<br>Please wait while other participants make their partner choices and you are matched...",
+        response_ends_trial: false,
+        trial_duration: 2000,
+      };
+    timeline_post.push(partner_matching_wait_1);
+
+              var partner_matching_wait_2 = {
+                type: "html-keyboard-response",
+                stimulus:
+                '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+                '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button> '+
+                '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button>'+
+                '<br><br>'+
+                "<br>Please wait while other participants make their partner choices and you are matched...",
+                response_ends_trial: false,
+                trial_duration: 2500,
+              };
+            timeline_post.push(partner_matching_wait_2);
+
+            var partner_matching_wait_3 = {
+              type: "html-keyboard-response",
+              stimulus:
+              '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+              '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+              '<button class="jspsych-btn" style="background-color:white; width: 40px; height: 40px"></button>'+
+              '<br><br>'+
+              "<br>Please wait while other participants make their partner choices and you are matched...",
+              response_ends_trial: false,
+              trial_duration: 2000,
+            };
+          timeline_post.push(partner_matching_wait_3);
+
+          var partner_matching_wait_4 = {
+            type: "html-keyboard-response",
+            stimulus:
+            '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+            '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button> '+
+            '<button class="jspsych-btn" style="background-color:green; width: 40px; height: 40px"></button>'+
+            '<br><br>'+
+            "<br>Please wait while other participants make their partner choices and you are matched...",
+            response_ends_trial: false,
+            trial_duration: 2000,
+            post_trial_gap: 1000,
+          };
+          timeline_post.push(partner_matching_wait_4);
+
+
+  // Matching: displaying automatic partner
+      var partner_matching_accept = {
+        type: "html-button-response",
+        choices: ['Begin'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        stimulus:function () {
+            var data = jsPsych.data.get();
+            var partner_no_accept = data.select('partner_accept_task1').max()
+            var showpartner =
+              "The partner you have been matched with is: <b> "+choices_names[partner_no_accept-1]+"</b>.<br><br>"+
+              "<div><img src='" + partnersource + partner_no_accept + ".png"+"'></img><br><br></div>"+
+              "<br><b>Congratulations!!!</b> You are matched: you are each one of the other\'s top 3 favourites.<br><br>Because each of you was in the other\'s top three favourite partners, you\'ve been assigned to play with "+choices_names[partner_no_accept-1]+". To proceed you will need to finish the task together.<br><br>"+
+              "Click the button below to proceed.<br><br>"
+            return showpartner
+          },
+        };
+    timeline_post.push(partner_matching_accept);
+
+/*
+        var partner_matching_reject = {
+          type: "html-button-response",
+          choices: ['Begin'],
+          response_ends_trial: true,
+          post_trial_gap: 1000,
+          stimulus:function () {
+            var data = jsPsych.data.get();
+            var partner_no_accept = data.select('partner_accept_task1').max()
+              var showpartner =
+              "The partner you have been matched with is: <b> "+choices_names[partner_no_accept-1]+"</b>.<br><br>"+
+                "<div><img src='" + partnersource + partner_no_accept + ".png"+"'></img><br><br></div>"+
+                "<b>Sorry!! You are not matched: you are not one of your partner\'s top three favourites.<br><br>But because no other participant chose you as one of their top three favourite partners, you've been assigned to play with "+choices_names[partner_no_accept-1]+". To proceed, you will need to finish the task together.<br><br>"+
+                "Click the button below to proceed.<br><br>"
+              return showpartner
+            },
+          };
+      timeline_post.push(partner_matching_reject);
+*/
+  // Practice: instructions before
+      var instructions_block_2 = {
+        type: "html-button-response",
+        stimulus: "<p>The remainder of this task involves the same procedure as before.<br><br>"+
+        "The only difference is that now you are playing with the new partner you have been matched with.<br><br>"+
+        "Click the button below to begin.</p>",
+        choices: ['Begin'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+      timeline_post.push(instructions_block_2);
+
+
+    // Practice: instructions after
+        var end_block_1 = {
+          type: "html-button-response",
+          stimulus: "<p>Well done. You have reached the end of Task 1.<br><br>"+
+          "If you would like to take a short break, please do so now.<br><br></p>"+
+          "Please click the button below to proceed to the second and final task.<br><br></p>",
+        //        stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"
+          choices: ['Next task'],
+          response_ends_trial: true,
+          post_trial_gap: 1000,
+          };
+
+
+
+// BLOCK 2 - WITH YOUR NEW PARTNER (down here because needs to get cookie)
+// ==============================================================================================
+
+      var partner_choice_waiting = {
+        type: "html-keyboard-response",
+        stimulus: function(){
+          var data = jsPsych.data.get();
+          var partner_no_accept = data.select('partner_accept_task1').max();
+          var showme = "<div><img src='" + partnersource + partner_no_accept + ".png"+"'></img><br><br></div>"+
+          "<div class='float: center;'><img src='img/waiting.gif'></img></div>"+
+          "<br>Please wait while your partner makes their choice..."
+          return showme
+        },
+        response_ends_trial: false,
+        trial_duration: function(){
+          return jsPsych.randomization.sampleWithoutReplacement([1500, 2000], 1)[0];
+      // what does this ,1 mean?
+        },
+        post_trial_gap: 750,
+        data: {partner: thispartner_auto},
+      };
+
+
+      var loop_choice_2 = {
+       timeline: [partner_choice_waiting, start_click, if_start_prompt, start_leave, if_leave_prompt, choices_trial, if_choice],
+       data: {test_part: '17_loop_choice_2'},
+       loop_function: function(){
+         var data = jsPsych.data.get().last(1).values()[0];
+         if(data.timedout == "yes"){
+           return true;
+         } else {
+           return false;
+         }
+       }
+     }
+
+     //// Get feedback on choice
+       var feedback_choice = {
+         type: 'html-keyboard-response',
+         response_ends_trial: false,
+         trial_duration: 3000,
+         post_trial_gap: 500,
+         data: {test_part: '4_feedback_choice', trial_no: jsPsych.timelineVariable('trial_no')},
+         stimulus: function() {
+           var data = jsPsych.data.get();
+           var partner_no_accept = data.select('partner_accept_task1').max();
+           var lasttrialdata = jsPsych.data.getLastTrialData();
+           var yourpayout = lasttrialdata.values()[0].yourpayout;
+           var computerpayout = lasttrialdata.values()[0].computerpayout;
+           var computeramount = lasttrialdata.values()[0].computeramount;
+           var yourcolor = lasttrialdata.values()[0].yourcolor;
+           var computercolor = lasttrialdata.values()[0].computercolor;
+           var resultstable =
+           '<table>\
+             <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+             <tr><td> <img width="130" src="'+thisme+'"></img> </td>\
+               <th>Your choice</th><td>=</td>\
+               <td style = "background-color: '+yourcolor+'"><b>'+yourpayout+'<b></td></tr>\
+             <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+             <tr><td>  <img width="130" src="'+ partnersource + partner_no_accept + '.png'+'"></img> </td>\
+               <th>Your partners choice</th><td>=</td>\
+               <td style = "background-color: '+computercolor+';"><b>'+computeramount+'<b></td></tr>\
+             <tr><th></th> <td></td> <td></td><td></td></tr>\
+             <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;">\
+               <th style="color:red">REWARDS</th><td></td><td></td><td><br></td></tr>\
+             <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+             <tr>\
+               <th style = "font-size: 30px;">You</th>\
+               <td style = "font-size: 30px;"><b>'+yourpayout+'<b></td><td></td><td><br></td></tr>\
+             <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+             <tr>\
+               <th style = "font-size: 30px;">Your partner</th>\
+               <td style = "font-size: 30px;"><b>'+computerpayout+'<b></td><td></td><td><br></td></tr>\
+             <tr><th></th> <td></td> <td></td><td><br></td></tr>\
+           </table>';
+           return resultstable
+           },
+         }
+
+         round_2.push(loop_choice_2, feedback_choice)
+
+
+ // TRUST GAME
+ // ==============================================================================================
+ // ==============================================================================================
+ // ==============================================================================================
+ // ==============================================================================================
+
+
+ var start_click_trust = {
+   type: 'html-button-response',
+   prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
+   choices: ["", "Start", ""],
+   button_html: [
+     '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+     '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
+     '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+   response_ends_trial: true,
+   stimulus: [],
+   data: {test_part: "1_start_click", trial_no: jsPsych.timelineVariable('trial_no')},
+ };
+
+
+ //// Move the mouse to reveal options
+ var start_leave_trust = {
+   on_load: function() {
+     function mouseLeave() {
+       jsPsych.finishTrial({correct_response: true, intime: "yes"});
+       }
+     document.getElementById("boxleave").addEventListener("mouseleave", mouseLeave);
+   },
+   type: 'html-button-response',
+   prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>move the mouse outside the box to show choices</i></div>"],
+   choices: ["", "", ""],
+   button_html: [
+     '<div <button class="jspsych-btn-bpd-a" style="visibility:hidden;">%choice%</button></div>',
+     '<div id="boxleave" <button class="jspsych-btn-bpd-start">%choice%</button></div>',
+     '<div <button class="jspsych-btn-bpd-b" style="visibility:hidden;">%choice%</button></div>'],
+   response_ends_trial: false,
+   stimulus: [],
+   data: {test_part: "2_start_leave", trial_no: jsPsych.timelineVariable('trial_no')}
+   };
+
+
+   //filter:blur(3px);
+       var instructions_task2 = {
+         type: 'instructions',
+         pages: [
+           '<b>Welcome to Task 2</b>\
+           <br><br><br>As in in the previous task, you will play a number of rounds of a game with a partner. Your partner will first make a choice, after which you must make a choice.\
+           <br><br>Unlike in the previous task, in this task you will see both of your partner\'s choice options. However, you will not see which option they have selected when you must make your choice.\
+           <br><br>At the end of the experiment one round will be randomly selected from this task and you will be paid an amount of money equivalent to the points you earned in that round. The more points you earn, the greater your payment . The same is true for your partner: they will get a payment based on how many points they earned in the selected round. Again, your and your partner\'s payments  will be influenced by how quickly each of you completes your tasks.\
+           <br><br>Please click the button below to walk through detailed instructions for this task.',
+           '<table>\
+            <tr><th></th><td colspan = "7">First, your partner will be presented with two options: A and B.\
+            <br><br> In the example here:\
+            <br><br> If they choose option A they will receive 550 points and you will potentially receive 0 points. What points you actually receive depends on your own choice, as explained in the following slides.\
+            <br><br> If they choose option B they will receive 500 points and you will also potentially receive 500 points.\
+            <br><br></td></tr>\
+            <tr><td></td><th></th><td></td><td></td><th>A</th><td></td><th>B</th></tr>\
+              <tr><td></td><th colspan="2">Partner payoff</th><td><br><br><br><br><br> </td>\
+                <td style = "font-size: 35px;background-color:#0064ff; border-bottom: 5px solid black;solid black;"><b>550<b></td>\
+                <td></td><td style = "font-size: 35px;background-color:#00ff7f; border-bottom: 5px solid black;solid black;"><b>500<b></td></tr>\
+              <tr><td></td><th colspan="2">Your payoff</th><td><br><br><br><br><br></td>\
+                <td style = "font-size: 35px;background-color: #0064ff"><b>0<b></td>\
+                <td></td> <td style = "font-size: 35px;background-color:#00ff7f;"><b>500<b></td><td></td></tr>\
+           </table>\
+           <br><br>Click the button to continue the instructions',
+           '<table>\
+            <tr><th></th><td colspan = "7">You will see both options while they choose.\
+            <br><br> However, you will not know which choice they have made.\
+            <br><br></td></tr>\
+            <tr><td></td><th></th><td></td><td></td><th>A</th><td></td><th>B</th></tr>\
+              <tr><td></td><th colspan="2">Partner payoff</th><td><br><br><br><br><br> </td>\
+                <td style = "font-size: 35px;background-color:#0064ff; border-bottom: 5px solid black;solid black;"><b>550<b></td>\
+                <td></td><td style = "font-size: 35px;background-color:#00ff7f; border-bottom: 5px solid black;solid black;"><b>500<b></td></tr>\
+              <tr><td></td><th colspan="2">Your payoff</th><td><br><br><br><br><br></td>\
+                <td style = "font-size: 35px;background-color: #0064ff"><b>0<b></td>\
+                <td></td> <td style = "font-size: 35px;background-color:#00ff7f;"><b>500<b></td><td></td></tr>\
+           </table>\
+           <br><br>Click the button to continue the instructions',
+           '<table>\
+             <tr><td colspan = "8">It will then be your turn. You must also choose between 2 options.\
+             <br><br> One option - shown in combined blue/green - will include choices your partner had. If you choose this option your points will be based on your partner\'s choice.\
+             <br><br> Alternatively, you can choose the option shown in orange. Only you see this option, and you receive the points specified regardless of what your partner chooses. To repeat, though, what your partner receives is not affected.\
+             <br><br></td></tr>\
+             <tr><td></td><th></th><td></td><td></td><td></td><th></th><td></td><th></th></tr>\
+               <tr><td></td><th>Partner payoff</th><td><br><br><br><br><br> </td>\
+                 <td  style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#0064ff; border-bottom: 4px solid black; border-left: 4px dashed black;border-top: 4px dashed black;"><b>550<b></td>\
+                 <td style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#00ff7f; border-bottom: 4px solid black; border-right: 4px dashed black;border-top: 4px dashed black;"><b>500<b></td>\
+                 <td></td>\
+                 <td  style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#0064ff; border-bottom: 4px solid black;border-left: 4px dashed black;border-top: 4px dashed black;"><b>550<b></td>\
+                 <td style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#00ff7f; border-bottom: 4px solid black;border-right: 4px dashed black;border-top: 4px dashed black;"><b>500<b></td>\
+                 </tr>\
+               <tr><td></td><th>Your payoff</th><td><br><br><br><br><br></td>\
+                 <td style = "font-size: 35px;background-color: #0064ff; border-left: 4px dashed black;border-bottom: 4px dashed black;"><b>0<b></td>\
+                 <td style = "font-size: 35px;background-color:#00ff7f; border-right: 4px dashed black;border-bottom: 4px dashed black;"><b>500<b></td>\
+                 <td></td><td colspan="2" style = "font-size: 35px;background-color:#ffaa00; border-left: 4px dashed black; border-right: 4px dashed black;border-bottom: 4px dashed black;"><b>400<b></td>\
+                 </tr>\
+            </table>\
+           <br><br>Click the button to continue the instructions',
+           '<table>\
+             <tr><td colspan = "8">In the example here, if you choose the blue/green option, your points (bottom row) could be either 0 or 500.\
+             <br><br> You will not know how many points you\'ve earned  as you will not know which option  (blue or green) your partner chose. You will only find out if this round is randomly selected for earnings at the end of the experiment.\
+             <br><br> If you choose the orange option, you will earn 400 points.\
+             <br><br> Your partner\'s points  will always be whatever option they chose.\
+             <br><br> Note that the options will randomly switch sides, and may appear on the left or right.\
+             <br><br></td></tr>\
+             <tr><td></td><th></th><td></td><td></td><td></td><th></th><td></td><th></th></tr>\
+             <tr><td></td><th>Partner payoff</th><td><br><br><br><br><br> </td>\
+               <td  style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#0064ff; border-bottom: 4px solid black; border-left: 4px dashed black;border-top: 4px dashed black;"><b>550<b></td>\
+               <td style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#00ff7f; border-bottom: 4px solid black; border-right: 4px dashed black;border-top: 4px dashed black;"><b>500<b></td>\
+               <td></td>\
+               <td  style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#0064ff; border-bottom: 4px solid black;border-left: 4px dashed black;border-top: 4px dashed black;"><b>550<b></td>\
+               <td style = "opacity:0.40; filter:alpha(opacity=40);font-size: 35px;background-color:#00ff7f; border-bottom: 4px solid black;border-right: 4px dashed black;border-top: 4px dashed black;"><b>500<b></td>\
+               </tr>\
+             <tr><td></td><th>Your payoff</th><td><br><br><br><br><br></td>\
+               <td style = "font-size: 35px;background-color: #0064ff; border-left: 4px dashed black;border-bottom: 4px dashed black;"><b>0<b></td>\
+               <td style = "font-size: 35px;background-color:#00ff7f; border-right: 4px dashed black;border-bottom: 4px dashed black;"><b>500<b></td>\
+               <td></td><td colspan="2" style = "font-size: 35px;background-color:#ffaa00; border-left: 4px dashed black; border-right: 4px dashed black;border-bottom: 4px dashed black;"><b>400<b></td>\
+               </tr>\
+            </table>\
+           <br><br>Click the button to continue the instructions',
+           '<table>\
+              <tr><td colspan = "8">Once you have made your choice, you will see a summary screen like the one shown below. This shows your choice, your partner\'s choice options and both player\'s points.\
+              <br><br>This screen here shows the points if you previously selected the orange option.\
+              <br><br></td></tr>\
+                  <tr><th></th><th>Your choice</th><td><br><br></td>\
+                      <td></td><td colspan="2" style = "font-size: 30px;background-color: #ffaa00">\
+                      400</td></tr>\
+                    <tr><th></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                  <tr><th></th><th rowspan="2">Your partner\'s choice</th><td></td>\
+                      <td></td><td style = "font-size: 30px;background-color:#0064ff;border-bottom: 3px solid black;">550</td>\
+                      <td style = "font-size: 30px;background-color:#00ff7f;border-bottom: 3px solid black;">500</td>\
+                      </tr>\
+                  <tr><th></th><th><br><td></td>\
+                  <td style = "font-size: 30px;background-color:#0064ff; ">0</td>\
+                  <td style = "font-size: 30px;background-color:#00ff7f">500</td></th></tr>\
+                  <tr><th></th><th><br></th></tr>\
+                  <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;"><th></th>\
+                    <th style="color:red">REWARDS</th><td></td><td></td><td></td><td></td><td></td></tr>\
+                     <tr><tr><th></th></tr>\
+                  <tr><th></th>\
+                    <th style = "font-size: 30px;">You</th><td></td>\
+                    <td style = "font-size: 30px;"><b>400<b></td><td></td><td></td></tr>\
+                  <tr><th><br></th></tr>\
+                  <tr><th></th>\
+                    <th style = "font-size: 30px;">Your partner</th><td></td>\
+                    <td style = "font-size: 30px;"><b>550 or 500<b></td><td></td><td></td></tr>\
+                <tr><th></th></tr>\
+             </table>\
+             <br><br>Click the button to continue the instructions',
+          '<table>\
+             <tr><td colspan = "8">This screen here shows the points if you selected the blue/green option.\
+             <br><br></td></tr>\
+                 <tr><th></th><th rowspan="2">Your choice</th><td></td>\
+                 <td></td><td style = "font-size: 30px;background-color:#0064ff;border-bottom: 3px solid black;">550</td>\
+                 <td style = "font-size: 30px;background-color:#00ff7f;border-bottom: 3px solid black;">500</td></tr>\
+                 <tr><th></th><td></td><td></td>\
+                <td style = "font-size: 30px;background-color:#0064ff; ">0</td>\
+                <td style = "font-size: 30px;background-color:#00ff7f">500</td></th></tr>\
+              <tr><th><br></th></tr>\
+              <tr><th></th><th rowspan="2">Your partner\'s choice</th><td></td>\
+                     <td></td><td style = "font-size: 30px;background-color:#0064ff;border-bottom: 3px solid black;">550</td>\
+                     <td style = "font-size: 30px;background-color:#00ff7f;border-bottom: 3px solid black;">500</td></tr>\
+                 <tr><th></th><th><br><td></td>\
+                 <td style = "font-size: 30px;background-color:#0064ff; ">0</td>\
+                 <td style = "font-size: 30px;background-color:#00ff7f">500</td></th></tr>\
+                 <tr><th></th><th><br></th></tr>\
+                 <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;"><th></th>\
+                   <th style="color:red">REWARDS</th><td></td><td></td><td></td><td></td><td></td></tr>\
+                 <tr><tr><th></th></tr>\
+                 <tr><th></th>\
+                   <th style = "font-size: 30px;">You</th><td></td>\
+                   <td style = "font-size: 30px;"><b>0 or 500<b></td><td></td><td></td></tr>\
+                 <tr><th><br></th></tr>\
+                 <tr><th></th>\
+                   <th style = "font-size: 30px;">Your partner</th><td></td>\
+                   <td style = "font-size: 30px;"><b>550 or 500<b></td><td></td><td></td></tr>\
+               <tr><th></th></tr>\
+           </table>\
+           <br><br>Click the button to continue the instructions',
+           'Your partner will get no feedback on the choices you make.\
+           <br><br>As in the previous task, this next task is divided into two parts. In part 1, partners are randomly assigned to each other. In part 2, partners are assigned to each other based on who each player prefers.\
+           <br><br>Click the button below to see which partner you are matched with for the first part.'
+          ],
+         show_clickable_nav: true,
+         show_page_number: true
+       };
+//           <br><br>You will see both options while they choose.\
+
+      var partner_matching_auto_trust = {
+        type: "html-button-response",
+        stimulus: "<div><img src='"+thispartner_auto_2+"'></img><br><br></div>"+
+        "<p>The partner you have been matched with is: <b>Player 4</b>.<br><br> Click the button below to read the instructions for the task that follows.<br><br></p>",
+      //        stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"+
+        choices: ['Begin'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        };
+
+      timeline_task2.push(instructions_task2, partner_matching_wait_1_auto, partner_matching_wait_2_auto, partner_matching_wait_3_auto, partner_matching_wait_4_auto, partner_matching_auto_trust, instructions_practice_pre)
+
+     var trust_partner_choosing_auto = {
+       type: 'html-keyboard-response',
+       response_ends_trial: false,
+       trial_duration: function(){
+         return jsPsych.randomization.sampleWithoutReplacement([4500,5000,5500], 1)[0];
+       },
+       post_trial_gap: 500,
+       data: {test_part: 'trust_partner_choosing', trial_no: 2222},
+       stimulus: function() {
+         var choosingtable =
+         '<table>\
+           <tr><th></th><td></td><td></td><th colspan = "3">Please wait while your partner chooses between option A or B...<br><br></th><td></td></tr>\
+           <tr><th></th><td></td><td></td><th colspan = "3"><div class="float: center;"><img src="img/waiting.gif"></img></div><br></th><td></td></tr>\
+           <tr><th></th><td></td><td></td><th>A</th><td></td><th>B</th></tr>\
+             <tr><th>Partner payoff</th><td> <img width="130" src="'+thispartner_auto_2+'"></img> <br> </td>\
+               <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+'; border-bottom: 5px solid black;solid black;"><b>'+jsPsych.timelineVariable('a_top_no', true)+'<b></td>\
+               <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+'; border-bottom: 5px solid black;solid black;"><b>'+jsPsych.timelineVariable('b_top_no', true)+'<b></td></tr>\
+             <tr><th>Your payoff</th><td> <img width="130" src="'+thisme+'"></img> </td>\
+               <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+'"><b>'+jsPsych.timelineVariable('a_bottom_no', true)+'<b></td>\
+               <td></td> <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';"><b>'+jsPsych.timelineVariable('b_bottom_no', true)+'<b></td></tr>\
+          </table>';
+         return choosingtable
+         },
+       }
+/// Table styling: https://www.w3schools.com/html/html_tables.asp
+
+
+// Set up array to sample from for switching sides
+      var trustrandom =[];
+
+          var trust_choices_trial_right = {
+            type: 'html-button-response',
+            response_ends_trial: true,
+            trial_duration: 3000,
+            prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
+            post_trial_gap: 500,
+            on_load: function myMouseTracker() {
+                xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; mousePos = 0;
+                var start_time = (new Date()).getTime();
+                document.addEventListener('mousemove', mouseCoords);
+                function mouseCoords(e) {
+                  xpos = e.pageX;
+                  ypos = e.pageY;
+                  // Another way, using an object
+                    mousePos = {
+                      x: e.pageX,
+                      y: e.pageY};
+                };
+                console.log(mousePos);
+                myRecord = setInterval(getMousePosition, 10);
+                function getMousePosition() {
+                  var pos = mousePos;
+                  var cur_time = (new Date()).getTime();
+                  var time = cur_time - start_time;
+                  if (!pos) {}
+                  else {
+                      xposstore.push(xpos);
+                      yposstore.push(ypos);
+                      timestamp.push(time);}
+                }
+              },
+            choices: ["","","Start", "","",],
+            stimulus: [],
+            button_html: function(){
+              return [
+              '<div <button class="jspsych-btn-bpd-trust-right-'+jsPsych.timelineVariable('button_a', true)+'" \
+                  style="background-color: '+ jsPsych.timelineVariable('a_color', true) +'">\
+                  <u> '+jsPsych.timelineVariable('a_top_no', true)+'</u><br>\
+                   '+jsPsych.timelineVariable('a_bottom_no', true)+ '\
+                  </button></div>',
+
+              '<div <button class="jspsych-btn-bpd-trust-right-'+jsPsych.timelineVariable('button_b', true)+'" \
+                  style="background-color: '+ jsPsych.timelineVariable('b_color', true) +'">\
+                  <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>\
+                  '+jsPsych.timelineVariable('b_bottom_no', true)+ '\
+                  </button></div>',
+
+              '<div <button class="jspsych-btn-bpd-start"\
+                  style="visibility:hidden">%choice%</button></div>',
+
+              '<div <button class="jspsych-btn-bpd-start"\
+                  style="visibility:hidden">%choice%</button></div>',
+
+              '<div <button class="jspsych-btn-bpd-trust-right-'+jsPsych.timelineVariable('button_c', true)+'" \
+                  style="background-color: '+ jsPsych.timelineVariable('c_color', true) +'">\
+                  <u>'+jsPsych.timelineVariable('a_top_no', true)+' or '+jsPsych.timelineVariable('b_top_no', true)+' </u><br>\
+                  '+jsPsych.timelineVariable('outside_no', true)+'\
+                  </button></div>',
+
+              ]},
+              data: {test_part: 'trust_choice', trial_no: jsPsych.timelineVariable('trust_trial_no'), condition: jsPsych.timelineVariable('trust_condition'), a_top_no: jsPsych.timelineVariable('a_top_no'), a_bottom_no: jsPsych.timelineVariable('a_bottom_no'),
+                b_top_no: jsPsych.timelineVariable('b_top_no'), b_bottom_no: jsPsych.timelineVariable('b_bottom_no'), outside_no: jsPsych.timelineVariable('outside_no')
+              },
+              on_finish: function(data) {
+                  clearInterval(myRecord); // Stop mouse tracking
+                  // Calculate payout and colour of participant choice
+                  var defected = 0;
+                  if (data.button_pressed == "3") {
+                    defected =  1;
+                  }
+                  if (data.button_pressed == "4") {
+                    defected =  1;
+                  }
+                jsPsych.data.get().addToLast({
+                  ownamount: "right",
+                  defected: defected,
+                  xposfinal: xpos,
+                  yposfinal: ypos,
+                  xposstore: xposstore,
+                  yposstore: yposstore,
+                  timestamp: timestamp,
+                });
+              },
+            }
+      trustrandom.push(trust_choices_trial_right)
+
+        var trust_choices_trial_left = {
+          type: 'html-button-response',
+          response_ends_trial: true,
+          trial_duration: 3000,
+          prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
+          post_trial_gap: 500,
+          on_load: function myMouseTracker() {
+              xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; mousePos = 0;
+              var start_time = (new Date()).getTime();
+              document.addEventListener('mousemove', mouseCoords);
+              function mouseCoords(e) {
+                xpos = e.pageX;
+                ypos = e.pageY;
+                // Another way, using an object
+                  mousePos = {
+                    x: e.pageX,
+                    y: e.pageY};
+              };
+              console.log(mousePos);
+              myRecord = setInterval(getMousePosition, 10);
+              function getMousePosition() {
+                var pos = mousePos;
+                var cur_time = (new Date()).getTime();
+                var time = cur_time - start_time;
+                if (!pos) {}
+                else {
+                    xposstore.push(xpos);
+                    yposstore.push(ypos);
+                    timestamp.push(time);}
+              }
+            },
+          choices: ["","","Start", "","",],
+          stimulus: [],
+          button_html: function(){
+            return [
+              '<div <button class="jspsych-btn-bpd-trust-left-'+jsPsych.timelineVariable('button_c', true)+'" \
+                  style="background-color: '+ jsPsych.timelineVariable('c_color', true) +'">\
+                  <u>'+jsPsych.timelineVariable('a_top_no', true)+' or '+jsPsych.timelineVariable('b_top_no', true)+' </u><br>\
+                  '+jsPsych.timelineVariable('outside_no', true)+'\
+                  </button></div>',
+              '<div <button class="jspsych-btn-bpd-start"\
+                    style="visibility:hidden">%choice%</button></div>',
+              '<div <button class="jspsych-btn-bpd-start"\
+                  style="visibility:hidden">%choice%</button></div>',
+              '<div <button class="jspsych-btn-bpd-trust-left-'+jsPsych.timelineVariable('button_a', true)+'" \
+                  style="background-color: '+ jsPsych.timelineVariable('a_color', true) +'">\
+                  <u> '+jsPsych.timelineVariable('a_top_no', true)+'</u><br>\
+                   '+jsPsych.timelineVariable('a_bottom_no', true)+ '\
+                  </button></div>',
+              '<div <button class="jspsych-btn-bpd-trust-left-'+jsPsych.timelineVariable('button_b', true)+'" \
+                  style="background-color: '+ jsPsych.timelineVariable('b_color', true) +'">\
+                  <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>\
+                  '+jsPsych.timelineVariable('b_bottom_no', true)+ '\
+                  </button></div>',
+            ]},
+            data: {test_part: 'trust_choice', trial_no: jsPsych.timelineVariable('trust_trial_no'), condition: jsPsych.timelineVariable('trust_condition'), a_top_no: jsPsych.timelineVariable('a_top_no'), a_bottom_no: jsPsych.timelineVariable('a_bottom_no'),
+              b_top_no: jsPsych.timelineVariable('b_top_no'), b_bottom_no: jsPsych.timelineVariable('b_bottom_no'), outside_no: jsPsych.timelineVariable('outside_no')
+            },
+            on_finish: function(data) {
+                clearInterval(myRecord); // Stop mouse tracking
+                // Calculate payout and colour of participant choice
+                var defected = 0;
+                if (data.button_pressed == "0") {
+                  defected =  1;
+                }
+                if (data.button_pressed == "1") {
+                  defected =  1;
+                }
+              jsPsych.data.get().addToLast({
+                ownamount: "left",
+                defected: defected,
+                xposfinal: xpos,
+                yposfinal: ypos,
+                xposstore: xposstore,
+                yposstore: yposstore,
+                timestamp: timestamp,
+              });
+            },
+          }
+    trustrandom.push(trust_choices_trial_left)
+
+// Randomly select either RHS or LHS
+    var trustsample = jsPsych.randomization.sampleWithoutReplacement(trustrandom,1)[0]
+//    trust.push(trustsample)
+
+// if and loop
+            var timeout_trust = {
+              type: "html-keyboard-response",
+              stimulus:
+                "<div><i>You didn't respond within 3 seconds. Please try to respond faster next time!</i></div>",
+              response_ends_trial: true,
+              trial_duration: 2500,
+              post_trial_gap: 100,
+              data: {test_part: "trust_choice_timeout", timedout: "yes"}
+            };
+
+
+      // If no button pressed (i.e. == null) then
+          var if_choice_trust = {
+           timeline: [timeout],
+           data: {test_part: 'if_choice_trust'},
+           conditional_function: function(){
+             var data = jsPsych.data.get().last(1).values()[0];
+             if(data.button_pressed == null){
+               return true;
+             } else {
+               return false;
+             }
+           }
+         }
+
+        var trust_loop_choice_auto = {
+         timeline: [trust_partner_choosing_auto, start_click_trust, start_leave_trust, jsPsych.randomization.sampleWithoutReplacement(trustrandom,1)[0], if_choice_trust],
+         data: {test_part: 'trust_loop_choice_1'},
+         loop_function: function(){
+           var data = jsPsych.data.get().last(1).values()[0];
+           if(data.timedout == "yes"){
+             return true;
+           } else {
+             return false;
+           }
+         }
+        }
+
+        /*
+              var loop_choice_1 = {
+               timeline: [partner_choice_waiting_auto, start_click, if_start_prompt, start_leave, if_leave_prompt, choices_trial, if_choice],
+               data: {test_part: '17_loop_choice_1'},
+               loop_function: function(){
+                 var data = jsPsych.data.get().last(1).values()[0];
+                 if(data.timedout == "yes"){
+                   return true;
+                 } else {
+                   return false;
+                 }
+               }
+             }
+        */
+
+      var trust_feedback_choice_auto = {
+        type: 'html-keyboard-response',
+        response_ends_trial: true,
+        post_trial_gap: 500,
+        data: {test_part: '4_feedback_choice', trial_no: jsPsych.timelineVariable('trial_no')},
+        on_finish: function(){
+          saveData(""+myid+".csv", jsPsych.data.get().csv());
+        },
+        stimulus: function() {
+          var lasttrialdata = jsPsych.data.getLastTrialData();
+          var defected = lasttrialdata.values()[0].defected;
+          var resultstable;
+          if (defected == 1) {
+            var resultstable =
+            '<table>\
+              <tr><th><br></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your choice</th><td> <img width="130" src="'+thisme+'"></img> <br> </td>\
+                    <td></td><td colspan="2" style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('c_color', true)+';">\
+                    '+jsPsych.timelineVariable('outside_no', true)+'</td>\
+                  </tr>\
+                  <tr><th></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your partner\'s choice</th><td> <img width="130" src="'+thispartner_auto_2+'"></img> <br> </td>\
+                    <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('a_top_no', true)+'</u><br>'+jsPsych.timelineVariable('a_bottom_no', true)+'</td>\
+                    <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>'+jsPsych.timelineVariable('b_bottom_no', true)+'</td>\
+                </tr>\
+                <tr><th></th><th><br></th></tr>\
+                <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;"><th></th>\
+                  <th style="color:red">REWARDS</th><td></td><td></td><td></td><td></td><td></td></tr>\
+                <tr><td></td><td></td><td></td><td></td></tr>\
+                <tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 35px;">You</th><td></td>\
+                  <td style = "font-size: 35px;"><b>'+jsPsych.timelineVariable('outside_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 35px;">Your partner</th><td></td>\
+                  <td style = "font-size: 35px;"><b>'+jsPsych.timelineVariable('a_top_no', true)+' or '+jsPsych.timelineVariable('b_top_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+              <tr><th><br></th></tr>\
+              <tr><th colspan="4 "><i>Press any key on the keyboard to continue</i><br></th></tr>\
+            </table>';
+          }
+          else {
+            var resultstable =
+              '<table>\
+              <tr><th><br></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your choice</th><td> <img width="130" src="'+thisme+'"></img> <br> </td>\
+                <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+';">\
+                <u>'+jsPsych.timelineVariable('a_top_no', true)+'</u><br>'+jsPsych.timelineVariable('a_bottom_no', true)+'</td>\
+                <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';">\
+                <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>'+jsPsych.timelineVariable('b_bottom_no', true)+'</td>\                  </tr>\
+                <tr><th><br></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your partner\'s choice</th><td> <img width="130" src="'+thispartner_auto_2+'"></img> <br> </td>\
+                    <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('a_top_no', true)+'</u><br>'+jsPsych.timelineVariable('a_bottom_no', true)+'</td>\
+                    <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>'+jsPsych.timelineVariable('b_bottom_no', true)+'</td>\
+                </tr>\
+                <tr><th></th><th><br></th></tr>\
+                <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;"><th></th>\
+                  <th style="color:red">REWARDS</th><td></td><td></td><td></td><td></td><td></td></tr>\
+                <tr><td></td><td></td><td></td><td></td></tr>\
+                <tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 30px;">You</th><td></td>\
+                  <td style = "font-size: 30px;"><b>'+jsPsych.timelineVariable('a_bottom_no', true)+' or '+jsPsych.timelineVariable('b_bottom_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 30px;">Your partner</th><td></td>\
+                  <td style = "font-size: 30px;"><b>'+jsPsych.timelineVariable('a_top_no', true)+' or '+jsPsych.timelineVariable('b_top_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+                  <tr><th colspan="4 "><i>Press any key on the keyboard to continue</i><br></th></tr>\
+            </table>';
+          }
+          return resultstable
+          },
+        }
+
+
+
+       round_3.push(trust_loop_choice_auto, trust_feedback_choice_auto)
+
+
+
+//==============================================================================================
+
+
+      var trust_choosing_partners = {
+       type: 'survey-multi-select',
+       questions: [{prompt: "By reading about them and then clicking on their avatars to select, please choose <b>3 partners</b> you would like to work with in the task that follows.<br><br>"+
+       "You can unselect a partner by clicking on their image again. When you are finished, click on the continue button at the bottom of the screen",
+       options: choices_2, horizontal: false}],
+       required: true,
+       post_trial_gap: 1000,
+       on_finish: function(data) {
+      // Indicators for whether they selected partner :: names must align to img/ sources
+      // True if they chose the partner
+       var chose6 = (data.responses.includes("partner6"));
+       var chose7 = (data.responses.includes("partner7"));
+       var chose8 = (data.responses.includes("partner8"));
+       var chose9 = (data.responses.includes("partner9"));
+       var chose10 = (data.responses.includes("partner10"));
+      // Ind = 1 if they chose the partner
+       if (chose6 == true) {chose6_ind = 1};
+       if (chose7 == true) {chose7_ind = 1};
+       if (chose8 == true) {chose8_ind = 1};
+       if (chose9 == true) {chose9_ind = 1};
+       if (chose10 == true) {chose10_ind = 1};
+      // Array of partners they DID choose
+       var group_chosen =[];
+       if (chose6_ind == 1) [group_chosen.push(6)];
+       if (chose7_ind == 1) [group_chosen.push(7)];
+       if (chose8_ind == 1) [group_chosen.push(8)];
+       if (chose9_ind == 1) [group_chosen.push(9)];
+       if (chose10_ind == 1) [group_chosen.push(10)];
+      // Array of partners they DID NOT choose
+       var group_notchosen =[];
+       if (chose6_ind == 0) [group_notchosen.push(6)];
+       if (chose7_ind == 0) [group_notchosen.push(7)];
+       if (chose8_ind == 0) [group_notchosen.push(8)];
+       if (chose9_ind == 0) [group_notchosen.push(9)];
+       if (chose10_ind == 0) [group_notchosen.push(10)];
+
+       var partner_accept;
+       var partner_reject;
+
+       var partner_accept = group_chosen[Math.floor(Math.random()*group_chosen.length)];
+       var partner_reject = group_notchosen[Math.floor(Math.random()*group_notchosen.length)];
+
+       var noofpartners = group_chosen.length;
+
+       jsPsych.data.get().addToLast({
+         noofpartners: noofpartners,
+         chose6: chose6,
+         chose7: chose7,
+         chose8: chose8,
+         chose9: chose9,
+         chose10: chose10,
+         chose6_ind: chose6_ind,
+         chose7_ind: chose7_ind,
+         chose8_ind: chose8_ind,
+         chose9_ind: chose9_ind,
+         chose10_ind: chose10_ind,
+         group_chosen: group_chosen,
+         group_notchosen: group_notchosen,
+         partner_accept: partner_accept,
+         partner_reject: partner_reject,
+         partner_accept_task2:partner_accept,
+         });
+         }
+      };
+
+
+      var partner_matching_accept_trust = {
+        type: "html-button-response",
+        choices: ['Begin'],
+        response_ends_trial: true,
+        post_trial_gap: 1000,
+        stimulus:function () {
+            var data = jsPsych.data.get();
+            var partner_no_accept = data.select('partner_accept_task2').max()
+            var showpartner =
+              "The partner you have been matched with is: <b> "+choices_names[partner_no_accept-1]+"</b>.<br><br>"+
+              "<div><img src='" + partnersource + partner_no_accept + ".png"+"'></img><br><br></div>"+
+              "<br><b>Congratulations!!!</b> You are matched: you are each one of the other\'s top 3 favourites!<br><br>Because each of you was in the other\'s top three favourite partners, you\'ve been assigned to play with "+choices_names[partner_no_accept-1]+". To proceed you will need to finish the task together.<br><br>"+
+              "Click the button below to proceed.<br><br>"
+            return showpartner
+          },
+        };
+
+/*
+      // Matching: displaying automatic partner
+        var partner_matching_reject_trust = {
+          type: "html-button-response",
+          choices: ['Begin'],
+          response_ends_trial: true,
+          post_trial_gap: 1000,
+          stimulus:function () {
+            var data = jsPsych.data.get();
+            var partner_no_accept = data.select('partner_accept_task2').max()
+              var showpartner =
+              "The partner you have been matched with is: <b> "+choices_names[partner_no_accept-1]+"</b>.<br><br>"+
+                "<div><img src='" + partnersource + partner_no_accept + ".png"+"'></img><br><br></div>"+
+                "<b>Sorry!!</b> You are not matched: you are not one of your partner\'s top three favourites.\
+                <br><br>But because no other participant chose you as one of their top three favourite partners, you've been assigned to play with "+choices_names[partner_no_accept-1]+". To proceed, you will need to finish the task together.<br><br>"+
+                "Click the button below to proceed.<br><br>"
+              return showpartner
+            },
+          };
+*/
+      timeline_post_task2.push(instructions_break, trust_choosing_partners, partner_matching_wait_1, partner_matching_wait_2, partner_matching_wait_3, partner_matching_wait_4, partner_matching_accept_trust, instructions_block_2)
+
+     var trust_partner_choosing = {
+       type: 'html-keyboard-response',
+       response_ends_trial: false,
+       trial_duration: function(){
+         return jsPsych.randomization.sampleWithoutReplacement([4500,5000,5500], 1)[0];
+       },
+       post_trial_gap: 500,
+       data: {test_part: 'trust_partner_choosing', trial_no: 2222},
+       stimulus: function() {
+         var data = jsPsych.data.get();
+         var partner_no_accept = data.select('partner_accept_task2').max();
+         var choosingtable =
+         '<table>\
+           <tr><th></th><td></td><td></td><th colspan = "3">Please wait while your partner chooses between option A or B...<br><br></th><td></td></tr>\
+           <tr><th></th><td></td><td></td><th colspan = "3"><div class="float: center;"><img src="img/waiting.gif"></img></div><br></th><td></td></tr>\
+           <tr><th></th><td></td><td></td><th>A</th><td></td><th>B</th></tr>\
+             <tr><th>Partner payoff</th><td> <img width="130" src="'+ partnersource + partner_no_accept + '.png'+'"></img> <br> </td>\
+               <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+'; border-bottom: 5px solid black;solid black;"><b>'+jsPsych.timelineVariable('a_top_no', true)+'<b></td>\
+               <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+'; border-bottom: 5px solid black;solid black;"><b>'+jsPsych.timelineVariable('b_top_no', true)+'<b></td></tr>\
+             <tr><th>Your payoff</th><td> <img width="130" src="'+thisme+'"></img> </td>\
+               <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+'"><b>'+jsPsych.timelineVariable('a_bottom_no', true)+'<b></td>\
+               <td></td> <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';"><b>'+jsPsych.timelineVariable('b_bottom_no', true)+'<b></td></tr>\
+          </table>';
+         return choosingtable
+         },
+       }
+
+       var trust_loop_choice = {
+        timeline: [trust_partner_choosing, start_click_trust, start_leave_trust, jsPsych.randomization.sampleWithoutReplacement(trustrandom,1)[0], if_choice_trust],
+        data: {test_part: 'trust_loop_choice_1'},
+        loop_function: function(){
+          var data = jsPsych.data.get().last(1).values()[0];
+          if(data.timedout == "yes"){
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+
+      var trust_feedback_choice = {
+        type: 'html-keyboard-response',
+        response_ends_trial: true,
+        post_trial_gap: 500,
+        data: {test_part: '4_feedback_choice', trial_no: jsPsych.timelineVariable('trial_no')},
+        on_finish: function(){
+          saveData(""+myid+".csv", jsPsych.data.get().csv());
+        },
+        stimulus: function() {
+          var data = jsPsych.data.get();
+          var partner_no_accept = data.select('partner_accept_task2').max();
+          var lasttrialdata = jsPsych.data.getLastTrialData();
+          var defected = lasttrialdata.values()[0].defected;
+          var resultstable;
+          if (defected == 1) {
+            var resultstable =
+            '<table>\
+              <tr><th><br></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your choice</th><td> <img width="130" src="'+thisme+'"></img> <br> </td>\
+                    <td></td><td colspan="2" style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('c_color', true)+';">\
+                    '+jsPsych.timelineVariable('outside_no', true)+'</td>\
+                  </tr>\
+                  <tr><th></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your partner\'s choice</th><td> <img width="130" src="'+ partnersource + partner_no_accept + '.png'+'"></img> <br> </td>\
+                    <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('a_top_no', true)+'</u><br>'+jsPsych.timelineVariable('a_bottom_no', true)+'</td>\
+                    <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>'+jsPsych.timelineVariable('b_bottom_no', true)+'</td>\
+                </tr>\
+                <tr><th></th><th><br></th></tr>\
+                <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;"><th></th>\
+                  <th style="color:red">REWARDS</th><td></td><td></td><td></td><td></td><td></td></tr>\
+                <tr><td></td><td></td><td></td><td></td></tr>\
+                <tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 35px;">You</th><td></td>\
+                  <td style = "font-size: 35px;"><b>'+jsPsych.timelineVariable('outside_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 35px;">Your partner</th><td></td>\
+                  <td style = "font-size: 35px;"><b>'+jsPsych.timelineVariable('a_top_no', true)+' or '+jsPsych.timelineVariable('b_top_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+              <tr><th colspan="4 "><br><br><i>Press any key on the keyboard to continue</i><br><br><br></th></tr>\
+            </table>';
+          }
+          else {
+            var resultstable =
+              '<table>\
+              <tr><th><br></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your choice</th><td> <img width="130" src="'+thisme+'"></img> <br> </td>\
+                <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+';">\
+                <u>'+jsPsych.timelineVariable('a_top_no', true)+'</u><br>'+jsPsych.timelineVariable('a_bottom_no', true)+'</td>\
+                <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';">\
+                <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>'+jsPsych.timelineVariable('b_bottom_no', true)+'</td>\                  </tr>\
+                <tr><th><br></th><th></th><td></td><td></td><th></th><td></td><th></th></tr>\
+                <tr><th></th><th>Your partner\'s choice</th><td> <img width="130" src="'+ partnersource + partner_no_accept + '.png'+'"></img> <br> </td>\
+                    <td></td><td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('a_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('a_top_no', true)+'</u><br>'+jsPsych.timelineVariable('a_bottom_no', true)+'</td>\
+                    <td style = "font-size: 35px;background-color:'+jsPsych.timelineVariable('b_color', true)+';">\
+                    <u>'+jsPsych.timelineVariable('b_top_no', true)+'</u><br>'+jsPsych.timelineVariable('b_bottom_no', true)+'</td>\
+                </tr>\
+                <tr><th></th><th><br></th></tr>\
+                <tr style= "border-bottom: 1px solid black;border-top: 1px solid black;"><th></th>\
+                  <th style="color:red">REWARDS</th><td></td><td></td><td></td><td></td><td></td></tr>\
+                <tr><td></td><td></td><td></td><td></td></tr>\
+                <tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 30px;">You</th><td></td>\
+                  <td style = "font-size: 30px;"><b>'+jsPsych.timelineVariable('a_bottom_no', true)+' or '+jsPsych.timelineVariable('b_bottom_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+                <tr><th><br></th></tr>\
+                <tr><th></th>\
+                  <th style = "font-size: 30px;">Your partner</th><td></td>\
+                  <td style = "font-size: 30px;"><b>'+jsPsych.timelineVariable('a_top_no', true)+' or '+jsPsych.timelineVariable('b_top_no', true)+'<b></td><td></td><td><br></td>\
+                  </tr>\
+                  <tr><th colspan="4 "><br><br><i>Press any key on the keyboard to continue</i><br><br><br></th></tr>\
+            </table>';
+          }
+          return resultstable
+          },
+        }
+
+
+     round_4.push(trust_loop_choice, trust_feedback_choice)
+
+
+//  End of experiment
+// ==============================================================================================
+
+      var end_task_2 = {
+        on_load: function(){
+          saveData(""+myid+".csv", jsPsych.data.get().csv());
+        },
+        type: "html-button-response",
+        stimulus: "<p>You have finished all the tasks. Thank you for your participation!<br><br>"+
+        "Your earnings will be calculated when all participants have finished and paid to you later.<br><br>"+
+        "Please let the experimenter know you have finished.</p>",
+      //        stimulus: "<div><img src='svgavatars/ready-avatars/me.png'></img><br><br></div>"
+        choices: [],
+        response_ends_trial: false,
+        };
+
+
+// BUILDING THE ROUNDS
+// ==============================================================================================
+
+      var timeline_pre = {
+        timeline: timeline,
+        timeline_variables: [],
+        randomize_order: false,
+      };
+
+      var instructions_post = {
+        timeline: [instructions_practice_post],
+        timeline_variables: [],
+        randomize_order: false,
+      };
+
+      var timeline_after = {
+        timeline: timeline_post,
+        timeline_variables: [],
+        randomize_order: false,
+      };
+
+      var task_1_practice = {
+        timeline: round_1,
+        timeline_variables: timeline_variables_task_1_practice,
+        randomize_order: true,
+      };
+
+      var task_1_block_1 = {
+        timeline: round_1,
+        timeline_variables: timeline_variables_block_1,
+        randomize_order: true,
+      };
+
+      var task_1_block_2 = {
+        timeline: round_2,
+        timeline_variables: timeline_variables_block_2,
+        randomize_order: true,
+      };
+
+      var timeline_after_trust = {
+        timeline: timeline_post_task2,
+        timeline_variables: [],
+        randomize_order: false,
+      };
+
+      var timeline_pre_task2 = {
+        timeline: timeline_task2,
+        timeline_variables: [],
+        randomize_order: false,
+      };
+
+      var task_2_practice = {
+        timeline: round_3,
+        timeline_variables: timeline_variables_task_2_practice,
+        randomize_order: true,
+      };
+
+      var task_2_block_1 = {
+        timeline: round_3,
+        timeline_variables: timeline_variables_block_3,
+        randomize_order: true,
+      };
+
+// Must no longer be "auto"
+      var task_2_block_2 = {
+        timeline: round_4,
+        timeline_variables: timeline_variables_block_4,
+        randomize_order: true,
+      };
+
+
+      /*
+                var fullscreen_trial_exit = {
+                  type: 'fullscreen',
+                  fullscreen_mode: false
+                }
+
+            var fullscreen_exit = {
+              timeline: [fullscreen_trial_exit],
+              timeline_variables: [],
+              randomize_order: false,
+            };
+      */
+
+
+//timeline: [timeline_pre, task_1_practice, instructions_post, task_1_block_1, timeline_after, task_1_block_2, end_block_1],
+//        timeline: [timeline_pre_task2, task_2_practice, instructions_post, task_2_block_1, timeline_after_trust, task_2_block_2, end_task_2],
+
+      jsPsych.init({
+       timeline: [timeline_pre, task_1_practice, instructions_post, task_1_block_1, timeline_after, task_1_block_2, end_block_1,timeline_pre_task2, task_2_practice, instructions_post, task_2_block_1, timeline_after_trust, task_2_block_2, end_task_2],
+       on_finish: function()
+         {
+           jsPsych.data.displayData();
+           console.log("finished welcome");
+           saveData(""+myid+".csv", jsPsych.data.get().csv());
+       },
+      });
+
+
+
+      </script>
+</html>
