@@ -1,140 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <title>Coordination Games</title>
+<head>
+  <title>Coordination Games</title>
 
-    <script src="jspsych-6.0.4/jspsych.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-image-keyboard-response.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-image-button-response.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-instructions.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-html-button-response.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-select.js" ></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-choice.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-survey-text.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-external-html.js"></script>
-    <script src="jspsych-6.0.4/plugins/jspsych-fullscreen.js"></script>
+  <script src="jspsych-6.0.4/jspsych.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-html-keyboard-response.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-image-keyboard-response.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-image-button-response.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-instructions.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-html-button-response.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-select.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-survey-multi-choice.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-survey-text.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-external-html.js"></script>
+  <script src="jspsych-6.0.4/plugins/jspsych-fullscreen.js"></script>
 
-    <script src="jquery-3.3.1.min.js"></script>
+  <script src="jquery-3.3.1.min.js"></script>
 
-    <script src="jspsych-6.0.4/js.cookie.js"></script>
-    <script src="functions.js"></script>
+  <script src="jspsych-6.0.4/js.cookie.js"></script>
 
-    <link href="jspsych-6.0.4/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  <link href="jspsych-6.0.4/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 
-  </head>
+</head>
 
 
-      <script>
+<script>
 
-      function saveData(filename, filedata){
-         $.ajax({
-            type:'post',
-            cache: false,
-            url: 'write_data.php',
-            data: {filename: filename, filedata: filedata}
-         });
-      }
-
-// WELCOME AND OVERALL INSTRUCTIONS
-// ==============================================================================================
-
-    var timeline_welcome = [];
-
-//    var randomno = "welcome"+(Math.random()+"").replace("0.","");
-
-    var subject_id = jsPsych.randomization.randomID(6);
-    console.log(subject_id);
-
-    Cookies.set('subject_id', subject_id);
-
-    jsPsych.data.addProperties({
-      subject_id: subject_id,
+  function saveData(filename, filedata) {
+    $.ajax({
+      type: 'post',
+      cache: false,
+      url: 'write_data.php',
+      data: { filename: filename, filedata: filedata }
     });
-      /*
-            var fullscreen_trial = {
-              type: 'fullscreen',
-              fullscreen_mode: true
-            }
-            timeline_welcome.push(fullscreen_trial)
-      */
+  }
 
-// Landing page and welcome
-      var begin = {
-        type: "html-keyboard-response",
-        stimulus: ["<b>Welcome to this set of tasks!</b><br><br>"+
-      "<br><br><br>"+
-        "Press any key to continue"],
-        response_ends_trial: true,
-        post_trial_gap: 1000,
-      };
-    timeline_welcome.push(begin)
+  // WELCOME AND OVERALL INSTRUCTIONS
+  // ==============================================================================================
 
-    // Get demographic information
-          var survey = {
-              type: 'survey-text',
-              preamble: ["Before we begin, please could you answer the few questions below. The data you provide will be anonymous; we won't know who you are.<br><br>"],
-              questions: [
-                {prompt: 'Participant No.', columns: 20},
-                {prompt: 'What is your age?', columns: 3},
-                {prompt: 'What is your gender (female, male, transgender, transsexual, gender-neutral, or prefer not to say)?', columns: 20},
-              ],
-          };
-    timeline_welcome.push(survey);
-    // XX -----> If input incorrect / no info then remove
-    // XX -----> Set cookie for own avatar
+  var timeline_welcome = [];
 
+  //    var randomno = "welcome"+(Math.random()+"").replace("0.","");
 
-// Introduce overall experiment: first avatar generator, then tasks
-      var instructions_welcome = {
-      type: 'instructions',
-      pages: ['Welcome to this experiment, which consists of three stages<br><br>'+
-        'In the first stage, you will create an avatar of yourself. An avatar is a cartoon character that will represent you in your interactions with other participants during the tasks that follow.<br><br>'+
-        'The two stages that then follow are Task 1 and Task 2, in which you will perform two different tasks with various partners. These partners will be depicted by avatars they have created.<br><br>' +
-        'Click the button below to learn more',
-        'In both of these parts you will also have the opportunity to earn points. Your points will be converted into money at the end of the experiment, which we will pay out to you.<br><br>'+
-        'The instructions for each task and how you can earn points will be shown to you before the task begins.',
-        'Click the button below to first design your avatar.'],
-      show_clickable_nav: true,
-      show_page_number: true,
-      post_trial_gap: 1000
-      };
-    timeline_welcome.push(instructions_welcome)
+  var subject_id = jsPsych.randomization.randomID(6);
+  console.log(subject_id);
 
-    /*
-        function saveData(name, data){
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', 'write_data.php'); // 'write_data.php' is the path to the php file described above.
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.send(JSON.stringify({filename: name, filedata: data}));
+  Cookies.set('subject_id', subject_id);
 
-          xhr.onreadystatechange = function () {
-            console.log(xhr.status);
-          };
+  jsPsych.data.addProperties({
+    subject_id: subject_id,
+  });
+  /*
+        var fullscreen_trial = {
+          type: 'fullscreen',
+          fullscreen_mode: true
         }
-    */
+        timeline_welcome.push(fullscreen_trial)
+  */
+
+  // Landing page and welcome
+  var begin = {
+    type: "html-keyboard-response",
+    stimulus: ["<b>Welcome to this set of tasks!</b><br><br>" +
+      "<br><br><br>" +
+      "Press any key to continue"],
+    response_ends_trial: true,
+    post_trial_gap: 1000,
+  };
+  timeline_welcome.push(begin)
+
+  // Get demographic information
+  var survey = {
+    type: 'survey-text',
+    preamble: ["Before we begin, please could you answer the few questions below. The data you provide will be anonymous; we won't know who you are.<br><br>"],
+    questions: [
+      { prompt: 'Participant No.', columns: 20 },
+      { prompt: 'What is your age?', columns: 3 },
+      { prompt: 'What is your gender (female, male, transgender, transsexual, gender-neutral, or prefer not to say)?', columns: 20 },
+    ],
+  };
+  timeline_welcome.push(survey);
+  // XX -----> If input incorrect / no info then remove
+  // XX -----> Set cookie for own avatar
 
 
-    jsPsych.init({
-      timeline: timeline_welcome,
-      on_finish: function()
-        {
-//          jsPsych.data.displayData();
-          console.log("finished welcome");
-          saveData("welcome"+subject_id+".csv", jsPsych.data.get().csv());
-          window.location.replace("2_avatargen.html");
-      },
-    });
+  // Introduce overall experiment: first avatar generator, then tasks
+  var instructions_welcome = {
+    type: 'instructions',
+    pages: ['Welcome to this experiment, which consists of three stages<br><br>' +
+      'In the first stage, you will create an avatar of yourself. An avatar is a cartoon character that will represent you in your interactions with other participants during the tasks that follow.<br><br>' +
+      'The two stages that then follow are Task 1 and Task 2, in which you will perform two different tasks with various partners. These partners will be depicted by avatars they have created.<br><br>' +
+      'Click the button below to learn more',
+    'In both of these parts you will also have the opportunity to earn points. Your points will be converted into money at the end of the experiment, which we will pay out to you.<br><br>' +
+    'The instructions for each task and how you can earn points will be shown to you before the task begins.',
+      'Click the button below to first design your avatar.'],
+    show_clickable_nav: true,
+    show_page_number: true,
+    post_trial_gap: 1000
+  };
+  timeline_welcome.push(instructions_welcome)
+
+  /*
+      function saveData(name, data){
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'write_data.php'); // 'write_data.php' is the path to the php file described above.
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({filename: name, filedata: data}));
+
+        xhr.onreadystatechange = function () {
+          console.log(xhr.status);
+        };
+      }
+  */
+
+
+  jsPsych.init({
+    timeline: timeline_welcome,
+    on_finish: function () {
+      //          jsPsych.data.displayData();
+      console.log("finished welcome");
+      saveData("welcome" + subject_id + ".csv", jsPsych.data.get().csv());
+      window.location.replace("2_avatargen.html");
+    },
+  });
 
 //"+subject_id+"
-      </script>
+</script>
 
 
 
-      <body>
+<body>
 
-      </body>
+</body>
 
 
 

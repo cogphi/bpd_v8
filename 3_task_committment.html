@@ -1626,97 +1626,6 @@
       });
     },
   }
-  // trustrandom.push(trust_choices_trial_right)
-
-  // var trust_choices_trial_left = {
-  //   type: 'html-button-response',
-  //   response_ends_trial: true,
-  //   trial_duration: 3000,
-  //   prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
-  //   post_trial_gap: 500,
-  //   on_load: function myMouseTracker() {
-  //     xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; mousePos = 0;
-  //     var start_time = (new Date()).getTime();
-  //     document.addEventListener('mousemove', mouseCoords);
-  //     function mouseCoords(e) {
-  //       xpos = e.pageX;
-  //       ypos = e.pageY;
-  //       // Another way, using an object
-  //       mousePos = {
-  //         x: e.pageX,
-  //         y: e.pageY
-  //       };
-  //     };
-  //     console.log(mousePos);
-  //     myRecord = setInterval(getMousePosition, 10);
-  //     function getMousePosition() {
-  //       var pos = mousePos;
-  //       var cur_time = (new Date()).getTime();
-  //       var time = cur_time - start_time;
-  //       if (!pos) { }
-  //       else {
-  //         xposstore.push(xpos);
-  //         yposstore.push(ypos);
-  //         timestamp.push(time);
-  //       }
-  //     }
-  //   },
-  //   choices: ["", "", "Start", "", "",],
-  //   stimulus: [],
-  //   button_html: function () {
-  //     return [
-  //       '<div <button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_c', true) + '" \
-  //                 style="background-color: '+ jsPsych.timelineVariable('c_color', true) + '">\
-  //                 <u>'+ jsPsych.timelineVariable('a_top_no', true) + ' or ' + jsPsych.timelineVariable('b_top_no', true) + ' </u><br>\
-  //                 '+ jsPsych.timelineVariable('outside_no', true) + '\
-  //                 </button></div>',
-  //       '<div <button class="jspsych-btn-bpd-start"\
-  //                   style="visibility:hidden">%choice%</button></div>',
-  //       '<div <button class="jspsych-btn-bpd-start"\
-  //                 style="visibility:hidden">%choice%</button></div>',
-  //       '<div <button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_a', true) + '" \
-  //                 style="background-color: '+ jsPsych.timelineVariable('a_color', true) + '">\
-  //                 <u> '+ jsPsych.timelineVariable('a_top_no', true) + '</u><br>\
-  //                  '+ jsPsych.timelineVariable('a_bottom_no', true) + '\
-  //                 </button></div>',
-  //       '<div <button class="jspsych-btn-bpd-trust-left-' + jsPsych.timelineVariable('button_b', true) + '" \
-  //                 style="background-color: '+ jsPsych.timelineVariable('b_color', true) + '">\
-  //                 <u>'+ jsPsych.timelineVariable('b_top_no', true) + '</u><br>\
-  //                 '+ jsPsych.timelineVariable('b_bottom_no', true) + '\
-  //                 </button></div>',
-  //     ]
-  //   },
-  //   data: {
-  //     test_part: 'trust_choice', trial_no: jsPsych.timelineVariable('trust_trial_no'), condition: jsPsych.timelineVariable('trust_condition'), a_top_no: jsPsych.timelineVariable('a_top_no'), a_bottom_no: jsPsych.timelineVariable('a_bottom_no'),
-  //     b_top_no: jsPsych.timelineVariable('b_top_no'), b_bottom_no: jsPsych.timelineVariable('b_bottom_no'), outside_no: jsPsych.timelineVariable('outside_no')
-  //   },
-  //   on_finish: function (data) {
-  //     clearInterval(myRecord); // Stop mouse tracking
-  //     // Calculate payout and colour of participant choice
-  //     var defected = 0;
-  //     if (data.button_pressed == "0") {
-  //       defected = 1;
-  //     }
-  //     if (data.button_pressed == "1") {
-  //       defected = 1;
-  //     }
-  //     jsPsych.data.get().addToLast({
-  //       ownamount: "left",
-  //       defected: defected,
-  //       xposfinal: xpos,
-  //       yposfinal: ypos,
-  //       xposstore: xposstore,
-  //       yposstore: yposstore,
-  //       timestamp: timestamp,
-  //     });
-  //   },
-  // }
-  // trustrandom.push(trust_choices_trial_left)
-
-
-  // // Randomly select either RHS or LHS
-  // var trustsample = jsPsych.randomization.sampleWithoutReplacement(trustrandom, 1)[0]
-  // //    trust.push(trustsample)
 
   // if and loop
   var timeout_trust = {
@@ -1766,21 +1675,6 @@
       }
     }
   }
-
-  /*
-        var loop_choice_1 = {
-         timeline: [partner_choice_waiting_auto, start_click, if_start_prompt, start_leave, if_leave_prompt, choices_trial, if_choice],
-         data: {test_part: '17_loop_choice_1'},
-         loop_function: function(){
-           var data = jsPsych.data.get().last(1).values()[0];
-           if(data.timedout == "yes"){
-             return true;
-           } else {
-             return false;
-           }
-         }
-       }
-  */
 
   var trust_feedback_choice_auto = {
     type: 'html-keyboard-response',
@@ -1871,7 +1765,6 @@
   round_3.push(trust_loop_choice_auto, trust_feedback_choice_auto)
 
 
-
   //==============================================================================================
 
 
@@ -1960,27 +1853,17 @@
     },
   };
 
-  /*
-        // Matching: displaying automatic partner
-          var partner_matching_reject_trust = {
-            type: "html-button-response",
-            choices: ['Begin'],
-            response_ends_trial: true,
-            post_trial_gap: 1000,
-            stimulus:function () {
-              var data = jsPsych.data.get();
-              var partner_no_accept = data.select('partner_accept_task2').max()
-                var showpartner =
-                "The partner you have been matched with is: <b> "+choices_names[partner_no_accept-1]+"</b>.<br><br>"+
-                  "<div><img src='" + partnersource + partner_no_accept + ".png"+"'></img><br><br></div>"+
-                  "<b>Sorry!!</b> You are not matched: you are not one of your partner\'s top three favourites.\
-                  <br><br>But because no other participant chose you as one of their top three favourite partners, you've been assigned to play with "+choices_names[partner_no_accept-1]+". To proceed, you will need to finish the task together.<br><br>"+
-                  "Click the button below to proceed.<br><br>"
-                return showpartner
-              },
-            };
-  */
-  timeline_post_task2.push(instructions_break, trust_choosing_partners, partner_matching_wait_1, partner_matching_wait_2, partner_matching_wait_3, partner_matching_wait_4, partner_matching_accept_trust, instructions_block_2)
+
+  timeline_post_task2.push(
+    instructions_break, 
+    trust_choosing_partners, 
+    partner_matching_wait_1, 
+    partner_matching_wait_2, 
+    partner_matching_wait_3, 
+    partner_matching_wait_4, 
+    partner_matching_accept_trust, 
+    instructions_block_2
+  )
 
   var trust_partner_choosing = {
     type: 'html-keyboard-response',
