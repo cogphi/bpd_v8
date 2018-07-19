@@ -254,7 +254,6 @@
   var xposstore = [];
   var yposstore = [];
   var timestamp = [];
-  var mousePos;
 
   // Set up misc variables
   var lasttrialdata;
@@ -750,30 +749,21 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     post_trial_gap: 500,
     on_load: function myMouseTracker() {
-      xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; mousePos = 0;
+      xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
       var start_time = (new Date()).getTime();
       document.addEventListener('mousemove', mouseCoords);
       function mouseCoords(e) {
         xpos = e.pageX;
         ypos = e.pageY;
-        // Another way, using an object
-        mousePos = {
-          x: e.pageX,
-          y: e.pageY
-        };
       };
-      console.log(mousePos);
+      console.log({xpos:xpos, ypos:ypos});
       myRecord = setInterval(getMousePosition, 10);
       function getMousePosition() {
-        var pos = mousePos;
         var cur_time = (new Date()).getTime();
         var time = cur_time - start_time;
-        if (!pos) { }
-        else {
-          xposstore.push(xpos);
-          yposstore.push(ypos);
-          timestamp.push(time);
-        }
+        xposstore.push(xpos);
+        yposstore.push(ypos);
+        timestamp.push(time);
       }
     },
     choices: [
@@ -1488,30 +1478,20 @@
     prompt: ["<div style='color:darkred; position: relative; top: 250; visibility: hidden'><i>click the start button and move the mouse outside the box to begin</i></div>"],
     post_trial_gap: _debug ? 100 : 500,
     on_load: function myMouseTracker() {
-      xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; mousePos = 0;
+      xpos = 0; ypos = 0; timefinal = 0; xposstore = []; yposstore = []; timestamp = []; 
       var start_time = (new Date()).getTime();
       document.addEventListener('mousemove', mouseCoords);
       function mouseCoords(e) {
         xpos = e.pageX;
         ypos = e.pageY;
-        // Another way, using an object
-        mousePos = {
-          x: e.pageX,
-          y: e.pageY
-        };
       };
-      console.log(mousePos);
       myRecord = setInterval(getMousePosition, 10);
       function getMousePosition() {
-        var pos = mousePos;
         var cur_time = (new Date()).getTime();
         var time = cur_time - start_time;
-        if (!pos) { }
-        else {
-          xposstore.push(xpos);
-          yposstore.push(ypos);
-          timestamp.push(time);
-        }
+        xposstore.push(xpos);
+        yposstore.push(ypos);
+        timestamp.push(time);
       }
     },
     choices: ["", "", "Start", "", "",],
