@@ -729,6 +729,7 @@
   var start_leave = {
     on_load: function () {
       function mouseLeave() {
+        jsPsych.pluginAPI.clearAllTimeouts();
         jsPsych.finishTrial({ correct_response: true, intime: "yes" });
       }
       document.getElementById("boxleave").addEventListener("mouseleave", mouseLeave);
@@ -750,6 +751,7 @@
   var start_leave_prompt = {
     on_load: function () {
       function mouseLeave() {
+        jsPsych.pluginAPI.clearAllTimeouts();
         jsPsych.finishTrial({ correct_response: true });
       }
       document.getElementById("boxleave").addEventListener("mouseleave", mouseLeave);
@@ -1285,6 +1287,7 @@
   var start_leave_trust = {
     on_load: function () {
       function mouseLeave() {
+        jsPsych.pluginAPI.clearAllTimeouts();
         jsPsych.finishTrial({ correct_response: true, intime: "yes" });
       }
       document.getElementById("boxleave").addEventListener("mouseleave", mouseLeave);
