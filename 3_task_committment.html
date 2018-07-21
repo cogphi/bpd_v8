@@ -428,6 +428,25 @@
       data: { filename: filename, filedata: filedata }
     });
 
+
+    var postJSON = function (url, data) {
+      var retries = 5;
+      var params = {
+        type : 'post',
+        cache : false,
+        contentType : 'application/json; charset=utf-8',
+        url : url,
+        data : JSON.stringify(data)
+      }
+      var onFail = function(){
+        retries = retries-1;
+        if (retries > 0) {
+          setTimout( function(){ $.ajax(params).fail(onFail); }, 1000 );
+        }
+      }
+      $.ajax(params).fail(onFail);
+    }
+
     // experimental method for saving data (don’t rely on this)
     // experiment name is last part of url unless specified as query parameter:
     var experimentName = document.location.pathname.split('/').pop()
@@ -435,20 +454,14 @@
     if ( matches && matches.length > 1 ) {
       experimentName = matches[1]
     }
-    var toPost = {
+    var saveDataURL = 'https://exp1.butterfill.com/api/insertData/'+experimentName
+    var dataToPost = {
       participantId : Cookies.get('subject_id'),
       windowLocation : JSON.parse(JSON.stringify(window.location)),
       data : JSON.parse(jsPsych.data.get().json()),
       csvData : jsPsych.data.get().csv()
     };
-    console.log(toPost);
-    $.ajax({
-      type : 'post',
-      cache : false,
-      contentType : 'application/json; charset=utf-8',
-      url : 'https://exp1.butterfill.com/api/insertData/'+experimentName,
-      data : JSON.stringify(toPost)
-    })
+    postJSON(saveDataURL, dataToPost)
   }
 
   //      var rando = "welcome"+(Math.random()+"").replace("0.","");
