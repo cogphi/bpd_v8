@@ -253,7 +253,7 @@
   // create a mouse tracker that will handle all recordings for us.
   // you probably only need one of these.
   // 
-  var makeMouseTracker = function(minTimeBetweenRecordingsInMS) {
+  var makeMouseTracker = function (minTimeBetweenRecordingsInMS) {
     var startTime = 0;
     var xposstore = [];
     var yposstore = [];
@@ -427,6 +427,28 @@
       url: 'write_data.php',
       data: { filename: filename, filedata: filedata }
     });
+
+    // experimental method for saving data (don’t rely on this)
+    // experiment name is last part of url unless specified as query parameter:
+    var experimentName = document.location.pathname.split('/').pop()
+    var matches = window.location.search.match(/[\?&]experimentName=([^[&]+)/)
+    if ( matches && matches.length > 1 ) {
+      experimentName = matches[1]
+    }
+    var toPost = {
+      participantId : Cookies.get('subject_id'),
+      windowLocation : JSON.parse(JSON.stringify(window.location)),
+      data : JSON.parse(jsPsych.data.get().json()),
+      csvData : jsPsych.data.get().csv()
+    };
+    console.log(toPost);
+    $.ajax({
+      type : 'post',
+      cache : false,
+      contentType : 'application/json; charset=utf-8',
+      url : 'https://exp1.butterfill.com/api/insertData/'+experimentName,
+      data : JSON.stringify(toPost)
+    })
   }
 
   //      var rando = "welcome"+(Math.random()+"").replace("0.","");
